@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>发布任务 · CampusQuest</title>
+<link rel="stylesheet" href="assets/lib/element-ui/theme-chalk/index.css">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<div id="app" v-cloak>
+  <cq-topbar :me="me"></cq-topbar>
+  <div class="layout">
+    <cq-sidebar active="publish"></cq-sidebar>
+    <div class="main-wrap">
+      <div class="container">
+        <div class="page-head">
+          <div>
+            <h1>发布任务</h1>
+            <div class="sub">说清要帮忙的事，设置积分预算，等待同学接单。</div>
+          </div>
+        </div>
+
+        <div class="panel" v-if="meLoaded && me.credit < 90">
+          <div class="error-bar">
+            <span class="e-ico">!</span>
+            <span>你的信用分是 {{ me.credit }} 分，低于 90 分，暂时不能发布任务。可以先去大厅接单积累好评，或到个人中心查看信用记录。</span>
+          </div>
+          <div class="mt16">
+            <el-button size="small" @click="go('lobby.html')">去接单大厅</el-button>
+            <el-button size="small" @click="go('profile.html')">查看信用记录</el-button>
+          </div>
+        </div>
+
+        <div class="publish-grid" v-else-if="meLoaded">
+          <div class="panel publish-form">
+            <div class="error-bar mb12" v-if="errorText"><span class="e-ico">!</span><span>{{ errorText }}</span></div>
+            <div class="form-row">
+              <label>任务分类<span class="req">*</span></label>
+              <el-select v-model="form.category" placeholder="请选择任务分类" style="width: 260px">
+                <el-option v-for="c in categories" :key="c.code" :label="c.name" :value="c.code"></el-option>
+              </el-select>
+            </div>
+            <div class="form-row">
+              <label>任务标题<span class="req">*</span></label>
+              <el-input v-model="form.title" maxlength="60" show-word-limit placeholder="一句话说清要做什么，例如：东门菜鸟驿站取快递送到 3 号楼"></el-input>
+            </div>
+            <div class="form-row">
+              <label>任务描述<span class="req">*</span></label>
+              <el-input v-model="form.description" type="textarea" :rows="5" maxlength="1000" show-word-limit
+                        placeholder="写清取件码、送达位置、注意事项等。发布后可在聊天里补充细节。"></el-input>
+            </div>
+            <div class="form-row">
+              <label>积分预算<span class="req">*</span></label>
+              <el-input-number v-model="form.points" :min="1" :max="999" :step="5" controls-position="right"></el-input-number>
+              <span class="muted small" style="margin-left: 10px">发布时立即从你的积分中扣除，取消任务全额退回。</span>
+            </div>
+            <div class="form-row">
+              <label>地点说明<span class="req">*</span></label>
+              <el-input v-model="form.locationDesc" maxlength="255" placeholder="例如：东门菜鸟驿站 → 3 号宿舍楼 402"></el-input>
+            </div>
+            <div class="form-row">
+              <label>时间说明<span class="req">*</span></label>
+              <el-input v-model="form.timeDesc" maxlength="255" placeholder="例如：今天 17:30 前送到，超时可聊天协商"></el-input>
+            </div>
+            <div class="flex-between">
+              <span class="muted small">发布后任务进入接单大厅，等待同学申请。</span>
+              <el-button type="primary" :loading="submitting" @click="submit">确认发布</el-button>
+            </div>
+          </div>
+
+          <div class="rule-card">
+            <h4>发布前请确认</h4>
+            <div class="point-preview"><b>{{ me.points }}</b><span>当前可用积分</span></div>
+            <div class="muted small" style="margin-bottom: 14px">信用分 {{ me.credit }} 分 · {{ creditText }}</div>
+            <ul>
+              <li>预算就是积分，发布时立即扣除 <b>{{ form.points }}</b> 分。</li>
+              <li>确认接单前取消任务，积分 <b>全额退回</b>。</li>
+              <li>任务完成后，积分转给接单同学，不再二次扣减。</li>
+              <li>积分预算范围 <b>1–999</b>，标题最多 <b>60</b> 字。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/lib/vue.min.js"></script>
+<script src="assets/lib/element-ui/index.js"></script>
+<script src="assets/lib/axios.min.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/components.js"></script>
+<script src="assets/js/page/publish.js"></script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>排行榜 · CampusQuest</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body class="fixed-bar-page">
+
+<header class="topbar">
+  <div class="brand">
+    <div class="logo-mark">CQ</div>
+    <div class="brand-name">CampusQuest</div>
+    <div class="brand-sub">校园互助悬赏平台</div>
+  </div>
+  <div class="top-right">
+    <div class="balance">积分余额<b>100</b><i>积分</i></div>
+    <div class="bell">消息<span class="dot">3</span></div>
+    <div class="avatar-ph">头像</div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="side">
+    <div class="side-title">导航</div>
+    <nav class="nav">
+      <a href="dashboard.html"><span class="nav-ico">□</span>工作台</a>
+      <a href="lobby.html"><span class="nav-ico">□</span>接单大厅</a>
+      <a href="publish.html"><span class="nav-ico">□</span>发布任务</a>
+      <a href="my-tasks.html"><span class="nav-ico">□</span>我的任务</a>
+      <a href="messages.html"><span class="nav-ico">□</span>消息中心</a>
+      <a href="profile.html"><span class="nav-ico">□</span>个人中心</a>
+      <a class="active" href="leaderboard.html"><span class="nav-ico">□</span>排行榜</a>
+    </nav>
+  </aside>
+
+  <main class="main-wrap">
+    <div class="container">
+
+      <div class="page-head">
+        <div>
+          <h1>积分总榜</h1>
+          <p>按累计获得积分排名，每周一 00:00 更新一次；前 3 名在榜单中高亮展示。</p>
+        </div>
+        <span class="tag">统计截至 2026-11-05</span>
+      </div>
+
+      <section class="panel leaderboard-panel">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width: 78px;">名次</th>
+              <th>同学</th>
+              <th>信用分</th>
+              <th>完成任务</th>
+              <th class="num">累计积分</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="top">
+              <td><span class="rank-badge r1">1</span></td>
+              <td>小满</td>
+              <td>100</td>
+              <td>48</td>
+              <td class="num">1280</td>
+            </tr>
+            <tr class="top">
+              <td><span class="rank-badge r2">2</span></td>
+              <td>老周</td>
+              <td>100</td>
+              <td>45</td>
+              <td class="num">1190</td>
+            </tr>
+            <tr class="top">
+              <td><span class="rank-badge r3">3</span></td>
+              <td>陈默</td>
+              <td>98</td>
+              <td>41</td>
+              <td class="num">1050</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>阿哲</td>
+              <td>96</td>
+              <td>38</td>
+              <td class="num">980</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>小鹿</td>
+              <td>95</td>
+              <td>36</td>
+              <td class="num">920</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>阿宽</td>
+              <td>94</td>
+              <td>33</td>
+              <td class="num">870</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>白露</td>
+              <td>93</td>
+              <td>30</td>
+              <td class="num">810</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>林一</td>
+              <td>92</td>
+              <td>28</td>
+              <td class="num">760</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>柚子</td>
+              <td>91</td>
+              <td>25</td>
+              <td class="num">700</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>木木</td>
+              <td>90</td>
+              <td>22</td>
+              <td class="num">640</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<div class="my-rank-bar">
+  <span>我的名次：<b>第 18 名</b> · 320 积分</span>
+  <a class="bar-link" href="profile.html">查看我的积分明细</a>
+</div>
+
+</body>
+</html>

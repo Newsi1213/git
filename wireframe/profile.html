@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>个人中心 · CampusQuest</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="logo-mark">CQ</div>
+    <div class="brand-name">CampusQuest</div>
+    <div class="brand-sub">校园互助悬赏平台</div>
+  </div>
+  <div class="top-right">
+    <div class="balance">积分余额<b>100</b><i>积分</i></div>
+    <div class="bell">消息<span class="dot">3</span></div>
+    <div class="avatar-ph">头像</div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="side">
+    <div class="side-title">导航</div>
+    <nav class="nav">
+      <a href="dashboard.html"><span class="nav-ico">□</span>工作台</a>
+      <a href="lobby.html"><span class="nav-ico">□</span>接单大厅</a>
+      <a href="publish.html"><span class="nav-ico">□</span>发布任务</a>
+      <a href="my-tasks.html"><span class="nav-ico">□</span>我的任务</a>
+      <a href="messages.html"><span class="nav-ico">□</span>消息中心</a>
+      <a class="active" href="profile.html"><span class="nav-ico">□</span>个人中心</a>
+      <a href="leaderboard.html"><span class="nav-ico">□</span>排行榜</a>
+    </nav>
+  </aside>
+
+  <main class="main-wrap">
+    <div class="container">
+
+      <div class="page-head">
+        <div>
+          <h1>个人中心</h1>
+          <p>查看个人资料、积分与信用记录，管理评价和申诉。</p>
+        </div>
+        <span class="tag">已完成 36 个任务</span>
+      </div>
+
+      <section class="profile-grid">
+        <div class="panel profile-card">
+          <div class="avatar-xl">头像</div>
+          <div>
+            <div class="profile-name">
+              小满
+              <span class="tag">信用分 100</span>
+            </div>
+            <div class="profile-lines">
+              手机号：<b class="phone-num">138****1234</b>（已实名认证）<br>
+              注册时间：2025-09-12 · 校园身份：计算机学院 2024 级
+            </div>
+          </div>
+        </div>
+
+        <div class="panel points-card">
+          <div>
+            <div class="big">100<small>积分</small></div>
+            <div class="hint">1 元 = 10 积分，充值积分仅用于发布任务。</div>
+          </div>
+          <button class="btn-recharge" type="button">模拟充值</button>
+        </div>
+      </section>
+
+      <section class="panel" style="margin-bottom: 20px;">
+        <h2 class="panel-title">信用分</h2>
+        <div class="credit-layout">
+          <div>
+            <div class="credit-big"><b>100</b><span>分 · 信用良好</span></div>
+            <ul class="credit-rules">
+              <li>按时完成并获好评：信用分 +2。</li>
+              <li>超时未送达或未按约定交付：信用分 −2。</li>
+              <li>申诉成立：撤销对应扣分，恢复原信用分。</li>
+            </ul>
+          </div>
+          <div class="deduct-box">
+            <div class="deduct-row">
+              <span class="deduct-score">−2</span>
+              <div class="deduct-main">
+                <div class="deduct-title">超时未送达 · 2026-10-30 20:14</div>
+                <div class="deduct-sub">关联任务《帮取中通快递，菜鸟驿站 → 3 号宿舍楼》</div>
+              </div>
+              <span class="status-tag open">申诉待处理</span>
+            </div>
+            <div class="deduct-foot">
+              <span>扣分记录 1 条 · 申诉状态：待处理</span>
+              <button class="btn-sm dark" type="button">发起申诉</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="detail-grid-2">
+        <div class="panel table-panel">
+          <h2 class="panel-title">积分收支明细</h2>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>时间</th>
+                <th>类型</th>
+                <th>说明</th>
+                <th class="num">积分变动</th>
+                <th class="num">余额</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2026-11-04 09:12</td>
+                <td>发布任务</td>
+                <td>《帮取中通快递，菜鸟驿站 → 3 号宿舍楼》</td>
+                <td class="num minus">−22</td>
+                <td class="num">100</td>
+              </tr>
+              <tr>
+                <td>2026-11-03 20:30</td>
+                <td>任务结算</td>
+                <td>《帮带一杯奶茶和一份炸鸡》已完成</td>
+                <td class="num plus">+18</td>
+                <td class="num">122</td>
+              </tr>
+              <tr>
+                <td>2026-11-02 19:10</td>
+                <td>任务结算</td>
+                <td>《帮忙代排队取号，校医院早上 8 点》已完成</td>
+                <td class="num plus">+20</td>
+                <td class="num">104</td>
+              </tr>
+              <tr>
+                <td>2026-11-01 21:05</td>
+                <td>发布任务</td>
+                <td>《帮忙跑一趟打印店，打印装订课程报告》</td>
+                <td class="num minus">−25</td>
+                <td class="num">84</td>
+              </tr>
+              <tr>
+                <td>2026-10-31 10:00</td>
+                <td>模拟充值</td>
+                <td>充值 10 元 · 1 元 = 10 积分</td>
+                <td class="num plus">+100</td>
+                <td class="num">109</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="panel">
+          <h2 class="panel-title">我的评价摘要</h2>
+          <div class="review-summary">
+            <div class="review-big">
+              <b>92%</b>
+              <span>好评率</span>
+            </div>
+            <div class="review-bars">
+              <div class="review-bar-row">
+                <span class="rb-name">好评</span>
+                <span class="review-bar"><i style="width:92%"></i></span>
+                <span class="rb-num">12</span>
+              </div>
+              <div class="review-bar-row">
+                <span class="rb-name">差评</span>
+                <span class="review-bar"><i style="width:8%"></i></span>
+                <span class="rb-num">1</span>
+              </div>
+            </div>
+          </div>
+          <div class="review-tags">
+            高频评价标签：送得快 8 · 沟通顺畅 6 · 包装完好 3<br>
+            最近一条评价：小满「送得很快，沟通顺畅，下次还找你。」
+          </div>
+          <div style="margin-top: 16px;">
+            <button class="btn-sm" type="button">查看全部评价</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

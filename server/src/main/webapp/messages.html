@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>消息中心 · CampusQuest</title>
+<link rel="stylesheet" href="assets/lib/element-ui/theme-chalk/index.css">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<div id="app" v-cloak>
+  <cq-topbar :me="me"></cq-topbar>
+  <div class="layout">
+    <cq-sidebar active="messages"></cq-sidebar>
+    <div class="main-wrap">
+      <div class="container">
+        <div class="page-head">
+          <div>
+            <h1>消息中心</h1>
+            <div class="sub">系统通知与任务聊天集中在这里，未读消息会在顶部小红点提示。</div>
+          </div>
+          <span class="status-tag st-PENDING_CONFIRM" v-if="me.unreadCount > 0">未读 {{ me.unreadCount }} 条</span>
+          <span class="muted small" v-else>消息已全部读完</span>
+        </div>
+
+        <div class="tab-line">
+          <button type="button" :class="{ active: tab === 'notify' }" @click="tab = 'notify'">
+            系统通知<span class="count">{{ noticeTotal }}</span>
+          </button>
+          <button type="button" :class="{ active: tab === 'chat' }" @click="switchChat">
+            聊天会话<span class="count">{{ conversations.length }}</span>
+          </button>
+        </div>
+
+        <div v-show="tab === 'notify'">
+          <div class="panel">
+            <div class="panel-head-row">
+              <h3 class="panel-title">通知列表</h3>
+              <div class="chips">
+                <button type="button" class="chip" :class="{ active: !noticeOnlyUnread }"
+                        @click="changeNoticeFilter(false)">全部</button>
+                <button type="button" class="chip" :class="{ active: noticeOnlyUnread }"
+                        @click="changeNoticeFilter(true)">仅未读</button>
+              </div>
+            </div>
+
+            <div class="notice-list" v-loading="noticeLoading">
+              <div class="notice-item" :class="{ unread: n.isRead === 0 }" v-for="n in notices" :key="n.id"
+                   @click="openNotice(n)">
+                <div class="notice-ico">{{ noticeIcon(n.type) }}</div>
+                <div class="notice-body">
+                  <div class="notice-title">
+                    <span v-if="n.isRead === 0" class="notice-dot"></span>{{ n.title }}
+                    <span class="notice-tag">{{ noticeTag(n.type) }}</span>
+                  </div>
+                  <div class="notice-desc">{{ n.content }}</div>
+                </div>
+                <div class="notice-side">
+                  <span class="notice-time">{{ n.createdAt }}</span>
+                  <div><span class="notice-link">{{ noticeLinkText(n.type) }} →</span></div>
+                </div>
+              </div>
+            </div>
+            <cq-empty v-if="!noticeLoading && notices.length === 0" text="暂无通知"></cq-empty>
+            <el-pagination v-if="noticeTotal > noticeSize" background layout="prev, pager, next"
+                           :total="noticeTotal" :page-size="noticeSize" :current-page="noticePage"
+                           @current-change="changeNoticePage"></el-pagination>
+          </div>
+        </div>
+
+        <div v-show="tab === 'chat'">
+          <div class="panel">
+            <div class="msg-layout">
+              <div class="conv-list" v-loading="convLoading">
+                <div class="conv-item" v-for="c in conversations" :key="c.id"
+                     :class="{ active: c.id === activeConvId }" @click="selectConv(c)">
+                  <span class="conv-avatar">{{ (c.otherNickname || '?').substring(0, 1) }}</span>
+                  <div class="conv-main">
+                    <div class="conv-top">
+                      <span class="conv-name">{{ c.otherNickname }}</span>
+                      <span class="conv-time">{{ shortTime(c.lastMessageAt) }}</span>
+                    </div>
+                    <div class="conv-preview">{{ c.lastMessage }}</div>
+                    <div class="muted small">{{ c.taskTitle }}</div>
+                  </div>
+                </div>
+                <cq-empty v-if="!convLoading && conversations.length === 0"
+                          text="暂无聊天会话，任务被确认接单后会生成会话"></cq-empty>
+              </div>
+
+              <div class="conv-chat" v-if="activeConv">
+                <div class="flex-between mb12">
+                  <div class="muted small">
+                    任务：<a class="task-link" :href="'task-detail.html?id=' + activeConv.taskId">{{ activeConv.taskTitle }}</a>
+                  </div>
+                  <span class="status-tag" :class="'st-' + activeConv.taskStatus">
+                    {{ taskStatusName(activeConv.taskStatus) }}
+                  </span>
+                </div>
+                <chat-panel :conversation-id="activeConv.id"
+                            :title="'与 ' + activeConv.otherNickname + ' 的对话'"></chat-panel>
+              </div>
+              <div class="conv-chat" v-else>
+                <cq-empty text="从左侧选择一个会话开始聊天"></cq-empty>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/lib/vue.min.js"></script>
+<script src="assets/lib/element-ui/index.js"></script>
+<script src="assets/lib/axios.min.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/components.js"></script>
+<script src="assets/js/page/messages.js"></script>
+</body>
+</html>

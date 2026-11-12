@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>消息中心 · CampusQuest</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="logo-mark">CQ</div>
+    <div class="brand-name">CampusQuest</div>
+    <div class="brand-sub">校园互助悬赏平台</div>
+  </div>
+  <div class="top-right">
+    <div class="balance">积分余额<b>100</b><i>积分</i></div>
+    <div class="bell">消息<span class="dot">3</span></div>
+    <div class="avatar-ph">头像</div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="side">
+    <div class="side-title">导航</div>
+    <nav class="nav">
+      <a href="dashboard.html"><span class="nav-ico">□</span>工作台</a>
+      <a href="lobby.html"><span class="nav-ico">□</span>接单大厅</a>
+      <a href="publish.html"><span class="nav-ico">□</span>发布任务</a>
+      <a href="my-tasks.html"><span class="nav-ico">□</span>我的任务</a>
+      <a class="active" href="messages.html"><span class="nav-ico">□</span>消息中心</a>
+      <a href="profile.html"><span class="nav-ico">□</span>个人中心</a>
+      <a href="leaderboard.html"><span class="nav-ico">□</span>排行榜</a>
+    </nav>
+  </aside>
+
+  <main class="main-wrap">
+    <div class="container">
+
+      <div class="page-head">
+        <div>
+          <h1>消息中心</h1>
+          <p>系统通知与聊天会话集中在这里，未读消息会在顶部小红点提示。</p>
+        </div>
+        <span class="tag">未读 3 条</span>
+      </div>
+
+      <div class="tab-line">
+        <button class="active" type="button" data-tab="notify">系统通知<span class="count">5</span></button>
+        <button type="button" data-tab="chat">聊天会话<span class="count">3</span></button>
+      </div>
+
+      <!-- 系统通知 -->
+      <div class="tab-pane" id="pane-notify">
+        <section class="panel">
+          <div class="notice-list">
+
+            <div class="notice-item">
+              <div class="notice-ico">申请</div>
+              <div class="notice-body">
+                <div class="notice-title">收到新的接单申请<span class="notice-tag">收到申请</span></div>
+                <div class="notice-desc">阿哲（信用分 95）申请接单《帮取中通快递，菜鸟驿站 → 3 号宿舍楼》，请及时处理。</div>
+              </div>
+              <div class="notice-side">
+                <span class="notice-time">2026-11-03 10:05</span>
+                <a class="notice-link" href="task-detail.html">查看申请 →</a>
+              </div>
+            </div>
+
+            <div class="notice-item">
+              <div class="notice-ico">确认</div>
+              <div class="notice-body">
+                <div class="notice-title">你已被发布者确认接单<span class="notice-tag">被确认</span></div>
+                <div class="notice-desc">小满已确认你接单《晚上帮带一杯奶茶和一份炸鸡》，请按约定时间送达。</div>
+              </div>
+              <div class="notice-side">
+                <span class="notice-time">2026-11-02 18:20</span>
+                <a class="notice-link" href="my-tasks.html">查看任务 →</a>
+              </div>
+            </div>
+
+            <div class="notice-item">
+              <div class="notice-ico">评价</div>
+              <div class="notice-body">
+                <div class="notice-title">收到一条新的好评<span class="notice-tag">评价</span></div>
+                <div class="notice-desc">小满给你留下一条好评：「送得很快，沟通顺畅，下次还找你。」</div>
+              </div>
+              <div class="notice-side">
+                <span class="notice-time">2026-11-02 17:40</span>
+                <a class="notice-link" href="profile.html">查看评价 →</a>
+              </div>
+            </div>
+
+            <div class="notice-item">
+              <div class="notice-ico">到账</div>
+              <div class="notice-body">
+                <div class="notice-title">任务积分已结算到账<span class="notice-tag">结算到账</span></div>
+                <div class="notice-desc">+18 积分已到账，来自任务《晚上帮带一杯奶茶和一份炸鸡》，当前余额 100 积分。</div>
+              </div>
+              <div class="notice-side">
+                <span class="notice-time">2026-11-01 20:15</span>
+                <a class="notice-link" href="profile.html">查看明细 →</a>
+              </div>
+            </div>
+
+            <div class="notice-item">
+              <div class="notice-ico">申诉</div>
+              <div class="notice-body">
+                <div class="notice-title">申诉已处理完成<span class="notice-tag">申诉结果</span></div>
+                <div class="notice-desc">你的申诉已通过，此前扣除的 2 分信用分已撤销，信用分恢复为 100。</div>
+              </div>
+              <div class="notice-side">
+                <span class="notice-time">2026-10-30 14:10</span>
+                <a class="notice-link" href="profile.html">查看申诉 →</a>
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </div>
+
+      <!-- 聊天会话 -->
+      <div class="tab-pane" id="pane-chat" hidden>
+        <section class="panel">
+          <div class="msg-layout">
+
+            <div class="conv-list">
+              <div class="conv-item active">
+                <span class="conv-avatar"></span>
+                <div class="conv-main">
+                  <div class="conv-top">
+                    <span class="conv-name">小满</span>
+                    <span class="conv-time">10:42</span>
+                  </div>
+                  <div class="conv-preview">快递已经放到 3 号楼一楼货架了，谢谢！</div>
+                </div>
+                <span class="conv-unread"><span class="dot-mini">1</span></span>
+              </div>
+
+              <div class="conv-item">
+                <span class="conv-avatar"></span>
+                <div class="conv-main">
+                  <div class="conv-top">
+                    <span class="conv-name">阿宽</span>
+                    <span class="conv-time">昨天</span>
+                  </div>
+                  <div class="conv-preview">晚上 7 点前送到就行，不着急。</div>
+                </div>
+                <span class="conv-unread"><span class="dot-mini">2</span></span>
+              </div>
+
+              <div class="conv-item">
+                <span class="conv-avatar"></span>
+                <div class="conv-main">
+                  <div class="conv-top">
+                    <span class="conv-name">白露</span>
+                    <span class="conv-time">11-01</span>
+                  </div>
+                  <div class="conv-preview">谢谢，已经确认完成了。</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="conv-chat">
+              <div class="chat-head">
+                <div class="who">
+                  <span class="mini-avatar"></span>
+                  与小满的对话
+                </div>
+                <span class="online">在线 · 任务进行中</span>
+              </div>
+
+              <div class="chat-body">
+                <div class="chat-time">今天 10:32</div>
+                <div class="bubble them">同学你好，快递在菜鸟驿站东门那家，取件码 8-2-1023。</div>
+                <div class="bubble me">收到，我 11:40 下课，12 点前送到 3 号宿舍楼楼下。</div>
+                <div class="bubble me">快递已经放到 3 号楼一楼货架第二层，照片发你了。</div>
+                <div class="img-bubble">
+                  <div class="ph">图片占位</div>
+                  <div class="cap">快递放置位置照片</div>
+                </div>
+                <div class="bubble them">看到了，谢谢！我下课回去就确认。</div>
+              </div>
+
+              <div class="chat-input">
+                <input type="text" placeholder="输入消息…">
+                <div class="img-btn">发图</div>
+                <button class="send-btn" type="button">发送</button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  /* 仅用于「系统通知 / 聊天会话」面板切换，无业务逻辑 */
+  (function () {
+    var tabs = document.querySelectorAll('.tab-line button');
+    var panes = document.querySelectorAll('.tab-pane');
+
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].addEventListener('click', function () {
+        for (var j = 0; j < tabs.length; j++) {
+          tabs[j].classList.remove('active');
+        }
+        this.classList.add('active');
+
+        for (var k = 0; k < panes.length; k++) {
+          panes[k].hidden = panes[k].id !== 'pane-' + this.getAttribute('data-tab');
+        }
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

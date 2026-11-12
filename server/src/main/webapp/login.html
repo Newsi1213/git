@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>登录 / 注册 · CampusQuest</title>
+<link rel="stylesheet" href="assets/lib/element-ui/theme-chalk/index.css">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body class="login-page">
+<div id="app" v-cloak>
+  <div class="login-shell">
+    <div class="login-brand">
+      <div class="brand">
+        <div class="logo-mark">CQ</div>
+        <div class="brand-name">CampusQuest</div>
+        <div class="brand-sub">校园互助悬赏平台</div>
+      </div>
+      <div class="lb-hero">
+        <h1 class="lb-title">校园里的每件小事，<br>都值得被搭把手。</h1>
+        <p class="lb-sub">同学发布任务，同学顺路接单，完成后以积分结算，让帮忙这件事变得简单又有回馈。</p>
+        <ul class="lb-points">
+          <li><span class="lb-no">1</span>顺手帮个忙，任务完成积分当天到账，不收手续费。</li>
+          <li><span class="lb-no">2</span>信用分机制，接单双方都更放心。</li>
+          <li><span class="lb-no">3</span>覆盖取快递、代取外卖、代替服务、搬运、宿舍打扫等 6 类校园场景。</li>
+        </ul>
+      </div>
+      <div class="lb-foot">CAMPUSQUEST · 校园互助悬赏平台</div>
+    </div>
+
+    <div class="login-form">
+      <h2>{{ mode === 'login' ? '欢迎回来' : '创建账号' }}</h2>
+      <p class="form-sub">{{ mode === 'login' ? '用手机号和密码登录，继续你的校园互助。' : '注册即送 100 积分，信用分从 100 开始。' }}</p>
+
+      <div class="login-tabs">
+        <button type="button" :class="{ active: mode === 'login' }" @click="switchMode('login')">登录</button>
+        <button type="button" :class="{ active: mode === 'register' }" @click="switchMode('register')">注册</button>
+      </div>
+
+      <div class="error-bar mb12" v-if="errorText">
+        <span class="e-ico">!</span><span>{{ errorText }}</span>
+      </div>
+
+      <template v-if="mode === 'login'">
+        <div class="field">
+          <label class="field-label">手机号</label>
+          <input class="text-input" type="text" maxlength="11" v-model.trim="loginForm.phone" placeholder="请输入 11 位手机号">
+          <div class="hint">请输入 11 位手机号，用于登录与接收站内通知。</div>
+        </div>
+        <div class="field">
+          <label class="field-label">密码</label>
+          <input class="text-input" type="password" v-model="loginForm.password" placeholder="请输入密码" @keyup.enter="submitLogin">
+        </div>
+        <button class="login-submit" type="button" :disabled="loading" @click="submitLogin">{{ loading ? '登录中…' : '登录' }}</button>
+      </template>
+
+      <template v-else>
+        <div class="field">
+          <label class="field-label">手机号</label>
+          <input class="text-input" type="text" maxlength="11" v-model.trim="registerForm.phone" placeholder="请输入 11 位手机号">
+          <div class="hint">手机号唯一，注册后不能修改。</div>
+        </div>
+        <div class="field">
+          <label class="field-label">昵称</label>
+          <input class="text-input" type="text" maxlength="32" v-model.trim="registerForm.nickname" placeholder="给自己取一个校园昵称">
+          <div class="hint">昵称将展示在任务卡片与排行榜中。</div>
+        </div>
+        <div class="field">
+          <label class="field-label">密码</label>
+          <input class="text-input" type="password" v-model="registerForm.password" placeholder="请输入密码">
+        </div>
+        <div class="field">
+          <label class="field-label">确认密码</label>
+          <input class="text-input" type="password" v-model="registerForm.confirm" placeholder="请再输入一次密码" @keyup.enter="submitRegister">
+        </div>
+        <button class="login-submit" type="button" :disabled="loading" @click="submitRegister">{{ loading ? '提交中…' : '注册' }}</button>
+      </template>
+
+      <div class="login-note">
+        管理员请使用管理员账号登录 · <a href="javascript:void(0)" @click="openAdmin">管理员入口</a>
+      </div>
+      <div class="login-secure">
+        <span>登录即表示同意《用户协议》与《隐私说明》</span>
+        <span>仅限本机校园环境使用</span>
+      </div>
+    </div>
+  </div>
+
+  <el-dialog title="管理员登录" :visible.sync="adminVisible" width="380px" @closed="adminError = ''">
+    <div class="error-bar mb12" v-if="adminError"><span class="e-ico">!</span><span>{{ adminError }}</span></div>
+    <el-form label-position="top" size="small">
+      <el-form-item label="管理员账号">
+        <el-input v-model.trim="adminForm.username" placeholder="请输入管理员账号"></el-input>
+      </el-form-item>
+      <el-form-item label="密码">
+        <el-input v-model="adminForm.password" type="password" placeholder="请输入密码" @keyup.enter.native="submitAdmin"></el-input>
+      </el-form-item>
+    </el-form>
+    <span slot="footer">
+      <el-button size="small" @click="adminVisible = false">取消</el-button>
+      <el-button size="small" type="primary" :loading="loading" @click="submitAdmin">登录</el-button>
+    </span>
+  </el-dialog>
+</div>
+
+<script src="assets/lib/vue.min.js"></script>
+<script src="assets/lib/element-ui/index.js"></script>
+<script src="assets/lib/axios.min.js"></script>
+<script src="assets/js/core.js"></script>
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    mode: 'login',
+    loading: false,
+    errorText: '',
+    adminVisible: false,
+    adminError: '',
+    loginForm: { phone: '', password: '' },
+    registerForm: { phone: '', nickname: '', password: '', confirm: '' },
+    adminForm: { username: '', password: '' }
+  },
+  methods: {
+    switchMode: function (mode) {
+      this.mode = mode;
+      this.errorText = '';
+      this.loginForm = { phone: '', password: '' };
+      this.registerForm = { phone: '', nickname: '', password: '', confirm: '' };
+    },
+    validPhone: function (phone) {
+      return /^\d{11}$/.test(phone);
+    },
+    submitLogin: function () {
+      var self = this;
+      this.errorText = '';
+      if (!this.validPhone(this.loginForm.phone)) { this.errorText = '请输入 11 位手机号'; return; }
+      if (!this.loginForm.password) { this.errorText = '密码不能为空'; return; }
+      this.loading = true;
+      CQ.api.post('/auth/login', this.loginForm).then(function (data) {
+        location.href = data.role === 'ADMIN' ? 'admin/appeals.html' : 'dashboard.html';
+      }).catch(function (err) {
+        self.errorText = (err && err.message) || '登录失败，请稍后再试';
+      }).finally(function () { self.loading = false; });
+    },
+    submitRegister: function () {
+      var self = this;
+      this.errorText = '';
+      var f = this.registerForm;
+      if (!this.validPhone(f.phone)) { this.errorText = '请输入 11 位手机号'; return; }
+      if (!f.nickname) { this.errorText = '昵称不能为空'; return; }
+      if (!f.password) { this.errorText = '密码不能为空'; return; }
+      if (f.password !== f.confirm) { this.errorText = '两次输入的密码不一致'; return; }
+      this.loading = true;
+      CQ.api.post('/auth/register', { phone: f.phone, nickname: f.nickname, password: f.password }).then(function () {
+        ElementUI.Message.success('注册成功，请登录');
+        self.loginForm.phone = f.phone;
+        self.switchMode('login');
+        self.loginForm.phone = f.phone;
+      }).catch(function (err) {
+        self.errorText = (err && err.message) || '注册失败，请稍后再试';
+      }).finally(function () { self.loading = false; });
+    },
+    openAdmin: function () {
+      this.adminVisible = true;
+      this.adminForm = { username: '', password: '' };
+      this.adminError = '';
+    },
+    submitAdmin: function () {
+      var self = this;
+      this.adminError = '';
+      if (!this.adminForm.username || !this.adminForm.password) {
+        this.adminError = '请输入管理员账号和密码';
+        return;
+      }
+      this.loading = true;
+      CQ.api.post('/auth/admin/login', this.adminForm).then(function () {
+        location.href = 'admin/appeals.html';
+      }).catch(function (err) {
+        self.adminError = (err && err.message) || '登录失败';
+      }).finally(function () { self.loading = false; });
+    }
+  }
+});
+</script>
+</body>
+</html>

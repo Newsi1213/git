@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>工作台 · CampusQuest</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+
+<!-- 顶栏（学生端统一） -->
+<header class="topbar">
+  <div class="brand">
+    <div class="logo-mark">CQ</div>
+    <div class="brand-name">CampusQuest</div>
+    <div class="brand-sub">校园互助悬赏平台</div>
+  </div>
+  <div class="top-right">
+    <div class="balance">积分余额<b>100</b><i>积分</i></div>
+    <div class="bell">消息<span class="dot">3</span></div>
+    <div class="avatar-ph">头像</div>
+  </div>
+</header>
+
+<div class="layout">
+  <!-- 左侧导航（学生端统一） -->
+  <aside class="side">
+    <div class="side-title">导航</div>
+    <nav class="nav">
+      <a class="active" href="dashboard.html"><span class="nav-ico">□</span>工作台</a>
+      <a href="lobby.html"><span class="nav-ico">□</span>接单大厅</a>
+      <a href="publish.html"><span class="nav-ico">□</span>发布任务</a>
+      <a href="my-tasks.html"><span class="nav-ico">□</span>我的任务</a>
+      <a href="messages.html"><span class="nav-ico">□</span>消息中心</a>
+      <a href="profile.html"><span class="nav-ico">□</span>个人中心</a>
+      <a href="leaderboard.html"><span class="nav-ico">□</span>排行榜</a>
+    </nav>
+  </aside>
+
+  <main class="main-wrap">
+    <div class="container">
+
+      <div class="page-head">
+        <div>
+          <h1>工作台</h1>
+          <p>下午好，小满。今天有 2 个任务正在进行，1 个任务等待你确认完成。</p>
+        </div>
+        <a class="pub-link" href="my-tasks.html">查看我的任务 →</a>
+      </div>
+
+      <!-- 四张摘要卡 -->
+      <section class="summary-grid">
+        <a class="summary-card" href="profile.html">
+          <div class="summary-label"><span>积分余额</span><span class="arrow">→</span></div>
+          <div class="summary-value">100<small>积分</small></div>
+          <div class="summary-foot">可用于发布任务</div>
+        </a>
+        <a class="summary-card" href="profile.html">
+          <div class="summary-label"><span>信用分</span><span class="arrow">→</span></div>
+          <div class="summary-value">100<small>分</small></div>
+          <div class="summary-foot">信用良好，可正常发布</div>
+        </a>
+        <a class="summary-card" href="my-tasks.html">
+          <div class="summary-label"><span>我发布中</span><span class="arrow">→</span></div>
+          <div class="summary-value">2<small>个任务</small></div>
+          <div class="summary-foot">其中 1 个待接单</div>
+        </a>
+        <a class="summary-card" href="my-tasks.html">
+          <div class="summary-label"><span>待我确认</span><span class="arrow">→</span></div>
+          <div class="summary-value">1<small>个任务</small></div>
+          <div class="summary-foot">请在 24 小时内处理</div>
+        </a>
+      </section>
+
+      <!-- 两个快捷入口 -->
+      <section class="quick-grid">
+        <a class="quick-entry" href="publish.html">
+          <div class="quick-ico">发布</div>
+          <div class="quick-text">
+            <h3>发布任务</h3>
+            <p>说清要帮忙的事，设置积分预算，等待同学接单。</p>
+          </div>
+          <span class="quick-arrow">→</span>
+        </a>
+        <a class="quick-entry" href="lobby.html">
+          <div class="quick-ico">大厅</div>
+          <div class="quick-text">
+            <h3>去接单大厅</h3>
+            <p>看看有没有顺路能帮上的任务，赚取积分。</p>
+          </div>
+          <span class="quick-arrow">→</span>
+        </a>
+      </section>
+
+      <!-- 两块图表看板 -->
+      <section class="board-grid">
+        <div class="panel">
+          <h2 class="panel-title">近 7 天发布量</h2>
+          <div class="bar-chart">
+            <div class="chart-col">
+              <span class="chart-val">5</span>
+              <div class="chart-bar" style="height:90px"></div>
+              <span class="chart-label">10-30</span>
+            </div>
+            <div class="chart-col">
+              <span class="chart-val">8</span>
+              <div class="chart-bar" style="height:144px"></div>
+              <span class="chart-label">10-31</span>
+            </div>
+            <div class="chart-col">
+              <span class="chart-val">3</span>
+              <div class="chart-bar" style="height:54px"></div>
+              <span class="chart-label">11-01</span>
+            </div>
+            <div class="chart-col">
+              <span class="chart-val">6</span>
+              <div class="chart-bar" style="height:108px"></div>
+              <span class="chart-label">11-02</span>
+            </div>
+            <div class="chart-col">
+              <span class="chart-val">9</span>
+              <div class="chart-bar" style="height:162px"></div>
+              <span class="chart-label">11-03</span>
+            </div>
+            <div class="chart-col">
+              <span class="chart-val">4</span>
+              <div class="chart-bar" style="height:72px"></div>
+              <span class="chart-label">11-04</span>
+            </div>
+            <div class="chart-col">
+              <span class="chart-val">7</span>
+              <div class="chart-bar" style="height:126px"></div>
+              <span class="chart-label">11-05</span>
+            </div>
+          </div>
+          <div class="board-note">折线图区域，后续接图表库。当前为 CSS 柱状占位，仅展示版式。</div>
+        </div>
+
+        <div class="panel">
+          <h2 class="panel-title">六分类占比</h2>
+          <div class="donut-wrap">
+            <div class="donut">
+              <div class="donut-center">
+                <b>128</b>
+                <span>任务总数</span>
+              </div>
+            </div>
+            <ul class="legend">
+              <li><span class="sw" style="background:#3a3a3a"></span>取快递<span class="pct">22%</span></li>
+              <li><span class="sw" style="background:#676767"></span>代取外卖<span class="pct">20%</span></li>
+              <li><span class="sw" style="background:#8c8c8c"></span>代替服务<span class="pct">18%</span></li>
+              <li><span class="sw" style="background:#aaaaaa"></span>搬运服务<span class="pct">14%</span></li>
+              <li><span class="sw" style="background:#c6c6c6"></span>宿舍打扫<span class="pct">14%</span></li>
+              <li><span class="sw" style="background:#e0e0e0"></span>其他<span class="pct">12%</span></li>
+            </ul>
+          </div>
+          <div class="board-note">饼图为 conic-gradient 占位，比例仅作版式示意。</div>
+        </div>
+
+        <div class="panel span-2">
+          <h2 class="panel-title">被接单最多任务 Top 5</h2>
+          <ul class="top-list">
+            <li class="top-row">
+              <span class="rank-no hot">1</span>
+              <span class="top-title">帮取中通快递，菜鸟驿站 → 3 号宿舍楼</span>
+              <span class="top-tag">取快递</span>
+              <span class="top-count">被接单 8 次 · 20 积分</span>
+            </li>
+            <li class="top-row">
+              <span class="rank-no hot">2</span>
+              <span class="top-title">中午帮带一份黄焖鸡米饭，东门到教学楼 B 座</span>
+              <span class="top-tag">代取外卖</span>
+              <span class="top-count">被接单 7 次 · 12 积分</span>
+            </li>
+            <li class="top-row">
+              <span class="rank-no hot">3</span>
+              <span class="top-title">帮忙跑一趟打印店，打印装订课程报告 30 份</span>
+              <span class="top-tag">其他</span>
+              <span class="top-count">被接单 6 次 · 25 积分</span>
+            </li>
+            <li class="top-row">
+              <span class="rank-no">4</span>
+              <span class="top-title">帮把床垫和行李箱搬到 5 号楼 402</span>
+              <span class="top-tag">搬运服务</span>
+              <span class="top-count">被接单 5 次 · 45 积分</span>
+            </li>
+            <li class="top-row">
+              <span class="rank-no">5</span>
+              <span class="top-title">周末帮忙打扫四人间，重点是阳台和卫生间</span>
+              <span class="top-tag">宿舍打扫</span>
+              <span class="top-count">被接单 4 次 · 60 积分</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

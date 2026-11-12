@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>我的任务 · CampusQuest</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="logo-mark">CQ</div>
+    <div class="brand-name">CampusQuest</div>
+    <div class="brand-sub">校园互助悬赏平台</div>
+  </div>
+  <div class="top-right">
+    <div class="balance">积分余额<b>100</b><i>积分</i></div>
+    <div class="bell">消息<span class="dot">3</span></div>
+    <div class="avatar-ph">头像</div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="side">
+    <div class="side-title">导航</div>
+    <nav class="nav">
+      <a href="dashboard.html"><span class="nav-ico">□</span>工作台</a>
+      <a href="lobby.html"><span class="nav-ico">□</span>接单大厅</a>
+      <a href="publish.html"><span class="nav-ico">□</span>发布任务</a>
+      <a class="active" href="my-tasks.html"><span class="nav-ico">□</span>我的任务</a>
+      <a href="messages.html"><span class="nav-ico">□</span>消息中心</a>
+      <a href="profile.html"><span class="nav-ico">□</span>个人中心</a>
+      <a href="leaderboard.html"><span class="nav-ico">□</span>排行榜</a>
+    </nav>
+  </aside>
+
+  <main class="main-wrap">
+    <div class="container">
+
+      <div class="page-head">
+        <div>
+          <h1>我的任务</h1>
+          <p>管理你发布的任务和接下的任务，及时处理待确认与待评价事项。</p>
+        </div>
+        <a class="pub-link" href="publish.html">+ 发布新任务</a>
+      </div>
+
+      <div class="tab-line">
+        <button class="active" type="button" data-tab="published">我发布的<span class="count">4</span></button>
+        <button type="button" data-tab="accepted">我接的<span class="count">3</span></button>
+      </div>
+
+      <!-- 我发布的 -->
+      <div class="tab-pane" id="pane-published">
+        <div class="pane-head">
+          <span>共 4 条任务，按发布时间倒序排列</span>
+          <span>待处理 2 条</span>
+        </div>
+
+        <div class="task-list">
+
+          <article class="task-item">
+            <div class="task-item-body">
+              <div class="task-item-top">
+                <span class="task-cat"><span class="cat-bar c1"></span>取快递</span>
+                <span class="status-tag open">待接单</span>
+              </div>
+              <h3 class="task-item-title">帮取圆通快递两件，校门口驿站顺路带回来</h3>
+              <div class="task-item-meta">对方：<strong>暂无接单人</strong> · 发布于 2026-11-04 09:12 · 0 人申请</div>
+            </div>
+            <div class="task-item-side">
+              <div class="task-item-points"><b>15</b><span>积分</span></div>
+              <button class="btn-sm" type="button">取消任务</button>
+            </div>
+          </article>
+
+          <article class="task-item">
+            <div class="task-item-body">
+              <div class="task-item-top">
+                <span class="task-cat"><span class="cat-bar c4"></span>搬运服务</span>
+                <span class="status-tag doing">进行中</span>
+              </div>
+              <h3 class="task-item-title">帮把床垫和行李箱搬到 5 号楼 402，有电梯</h3>
+              <div class="task-item-meta">对方：<strong>老周</strong> · 发布于 2026-11-03 15:40 · 接单后约定今晚 19:00</div>
+            </div>
+            <div class="task-item-side">
+              <div class="task-item-points"><b>45</b><span>积分</span></div>
+              <button class="btn-sm dark" type="button">确认完成</button>
+            </div>
+          </article>
+
+          <article class="task-item">
+            <div class="task-item-body">
+              <div class="task-item-top">
+                <span class="task-cat"><span class="cat-bar c1"></span>取快递</span>
+                <span class="status-tag confirming">待确认完成</span>
+              </div>
+              <h3 class="task-item-title">帮取中通快递，菜鸟驿站 → 3 号宿舍楼，取件码已发</h3>
+              <div class="task-item-meta">对方：<strong>阿哲</strong> · 接单人已标记送达 · 剩余 23:14:08 自动确认</div>
+            </div>
+            <div class="task-item-side">
+              <div class="task-item-points"><b>20</b><span>积分</span></div>
+              <button class="btn-sm dark" type="button">确认完成</button>
+            </div>
+          </article>
+
+          <article class="task-item">
+            <div class="task-item-body">
+              <div class="task-item-top">
+                <span class="task-cat"><span class="cat-bar c3"></span>代替服务</span>
+                <span class="status-tag done">已完成</span>
+              </div>
+              <h3 class="task-item-title">帮忙代排队取号，校医院早上 8 点</h3>
+              <div class="task-item-meta">对方：<strong>白露</strong> · 完成于 2026-11-01 08:35 · 已结算 22 积分</div>
+            </div>
+            <div class="task-item-side">
+              <div class="task-item-points"><b>22</b><span>积分</span></div>
+              <button class="btn-sm" type="button">去评价</button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- 我接的 -->
+      <div class="tab-pane" id="pane-accepted" hidden>
+        <div class="pane-head">
+          <span>共 3 条任务，按更新时间倒序排列</span>
+          <span>待处理 2 条</span>
+        </div>
+
+        <div class="task-list">
+
+          <article class="task-item">
+            <div class="task-item-body">
+              <div class="task-item-top">
+                <span class="task-cat"><span class="cat-bar c3"></span>代替服务</span>
+                <span class="status-tag open">待接单</span>
+              </div>
+              <h3 class="task-item-title">周三下午帮我签到一场讲座，需要人脸识别，进场后拍照</h3>
+              <div class="task-item-meta">对方：<strong>林一</strong> · 发布者已选定你 · 请在 30 分钟内确认接单</div>
+            </div>
+            <div class="task-item-side">
+              <div class="task-item-points"><b>30</b><span>积分</span></div>
+              <button class="btn-sm dark" type="button">确认接单</button>
+            </div>
+          </article>
+
+          <article class="task-item">
+            <div class="task-item-body">
+              <div class="task-item-top">
+                <span class="task-cat"><span class="cat-bar c2"></span>代取外卖</span>
+                <span class="status-tag doing">进行中</span>
+              </div>
+              <h3 class="task-item-title">晚上帮带一杯奶茶和一份炸鸡，南门送到图书馆自习区</h3>
+              <div class="task-item-meta">对方：<strong>阿宽</strong> · 约定 19:30 前送达 · 已取餐</div>
+            </div>
+            <div class="task-item-side">
+              <div class="task-item-points"><b>18</b><span>积分</span></div>
+              <button class="btn-sm dark" type="button">已送达</button>
+            </div>
+          </article>
+
+          <article class="task-item">
+            <div class="task-item-body">
+              <div class="task-item-top">
+                <span class="task-cat"><span class="cat-bar c1"></span>取快递</span>
+                <span class="status-tag done">已完成</span>
+              </div>
+              <h3 class="task-item-title">帮取中通快递，菜鸟驿站 → 3 号宿舍楼</h3>
+              <div class="task-item-meta">对方：<strong>小满</strong> · 完成于 2026-11-03 11:52 · 已到账 20 积分</div>
+            </div>
+            <div class="task-item-side">
+              <div class="task-item-points"><b>20</b><span>积分</span></div>
+              <button class="btn-sm" type="button">去评价</button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- 空状态示例 -->
+      <div class="empty-demo">
+        <div class="empty-demo-label">空状态示例</div>
+        <div class="empty-state">
+          <div class="empty-ico">空</div>
+          <div class="empty-title">暂无任务</div>
+          <div class="empty-desc">你在这个分类下还没有任务记录，发布一个任务或去大厅接单试试。</div>
+          <a class="btn-sm dark" href="publish.html">去发布任务</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  /* 仅用于「我发布的 / 我接的」面板切换，无业务逻辑 */
+  (function () {
+    var tabs = document.querySelectorAll('.tab-line button');
+    var panes = document.querySelectorAll('.tab-pane');
+
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].addEventListener('click', function () {
+        for (var j = 0; j < tabs.length; j++) {
+          tabs[j].classList.remove('active');
+        }
+        this.classList.add('active');
+
+        for (var k = 0; k < panes.length; k++) {
+          panes[k].hidden = panes[k].id !== 'pane-' + this.getAttribute('data-tab');
+        }
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

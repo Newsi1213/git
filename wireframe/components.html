@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>组件对照 · CampusQuest</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="logo-mark">CQ</div>
+    <div class="brand-name">CampusQuest</div>
+    <div class="brand-sub">校园互助悬赏平台</div>
+  </div>
+  <div class="top-right">
+    <div class="balance">积分余额<b>100</b><i>积分</i></div>
+    <div class="bell">消息<span class="dot">3</span></div>
+    <div class="avatar-ph">头像</div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="side">
+    <div class="side-title">导航</div>
+    <nav class="nav">
+      <a href="dashboard.html"><span class="nav-ico">□</span>工作台</a>
+      <a href="lobby.html"><span class="nav-ico">□</span>接单大厅</a>
+      <a href="publish.html"><span class="nav-ico">□</span>发布任务</a>
+      <a href="my-tasks.html"><span class="nav-ico">□</span>我的任务</a>
+      <a href="messages.html"><span class="nav-ico">□</span>消息中心</a>
+      <a href="profile.html"><span class="nav-ico">□</span>个人中心</a>
+      <a href="leaderboard.html"><span class="nav-ico">□</span>排行榜</a>
+    </nav>
+  </aside>
+
+  <main class="main-wrap">
+    <div class="container">
+
+      <div class="page-head">
+        <div>
+          <h1>组件对照</h1>
+          <p>把可复用的线框组件集中展示，便于后续页面拼装与视觉走查。</p>
+        </div>
+        <span class="tag">灰阶线框 · 静态示意</span>
+      </div>
+
+      <!-- 任务卡片三种状态 -->
+      <section class="panel comp-section">
+        <div class="comp-head">
+          <h2>任务卡片 · 三种状态</h2>
+          <span class="comp-note">待接单 / 已有 3 人申请 / 已完成</span>
+        </div>
+        <div class="comp-cards">
+
+          <article class="card">
+            <div class="card-top">
+              <div class="cat"><span class="cat-bar c1"></span>取快递<span class="state">待接单</span></div>
+              <div class="points"><b>18</b><span>积分</span></div>
+            </div>
+            <h3 class="card-title">帮取圆通快递两件，校门口驿站顺路带回来</h3>
+            <div class="card-pub">
+              <span class="mini-avatar"></span>
+              <span>小鹿</span>
+              <span class="credit">信用分 90</span>
+            </div>
+            <div class="card-actions">
+              <a class="link" href="task-detail.html">查看详情 →</a>
+              <span class="apply-badge">0 人申请</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <div class="cat"><span class="cat-bar c2"></span>代取外卖<span class="state">已有 3 人申请</span></div>
+              <div class="points"><b>22</b><span>积分</span></div>
+            </div>
+            <h3 class="card-title">晚上帮带一杯奶茶和一份炸鸡，南门送到图书馆</h3>
+            <div class="card-pub">
+              <span class="mini-avatar"></span>
+              <span>阿宽</span>
+              <span class="credit">信用分 96</span>
+            </div>
+            <div class="card-actions">
+              <a class="link" href="task-detail.html">查看详情 →</a>
+              <span class="apply-badge">3 人申请</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <div class="cat"><span class="cat-bar c4"></span>搬运服务<span class="state">已完成</span></div>
+              <div class="points"><b>45</b><span>积分</span></div>
+            </div>
+            <h3 class="card-title">帮把床垫和行李箱搬到 5 号楼 402，有电梯</h3>
+            <div class="card-pub">
+              <span class="mini-avatar"></span>
+              <span>老周</span>
+              <span class="credit">信用分 100</span>
+            </div>
+            <div class="card-actions">
+              <a class="link" href="task-detail.html">查看详情 →</a>
+              <span class="apply-badge">已完成</span>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- 状态标签 + 按钮层级 -->
+      <section class="comp-grid">
+        <div class="panel comp-section">
+          <div class="comp-head">
+            <h2>状态标签 · 五种</h2>
+            <span class="comp-note">任务状态</span>
+          </div>
+          <div class="comp-stack">
+            <span class="status-tag open">待接单</span>
+            <span class="status-tag doing">进行中</span>
+            <span class="status-tag confirming">待确认完成</span>
+            <span class="status-tag done">已完成</span>
+            <span class="status-tag cancelled">已取消</span>
+          </div>
+        </div>
+
+        <div class="panel comp-section">
+          <div class="comp-head">
+            <h2>按钮层级</h2>
+            <span class="comp-note">主按钮 / 次按钮 / 文字按钮</span>
+          </div>
+          <div class="comp-stack">
+            <button class="btn-primary inline" type="button">主按钮</button>
+            <button class="btn-outline" type="button">次按钮</button>
+            <button class="btn-text" type="button">文字按钮</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 评价弹窗 + 其他组件 -->
+      <section class="comp-grid">
+        <div class="panel comp-section">
+          <div class="comp-head">
+            <h2>评价弹窗</h2>
+            <span class="comp-note">好评 / 差评 + 评语</span>
+          </div>
+          <div class="modal-demo">
+            <h3 class="modal-title">评价本次任务</h3>
+            <div class="modal-sub">对方：阿哲 · 任务《帮取中通快递，菜鸟驿站 → 3 号宿舍楼》</div>
+            <div class="stars">★★★★★</div>
+            <div class="review-chips">
+              <button class="review-chip active" type="button">好评</button>
+              <button class="review-chip" type="button">差评</button>
+            </div>
+            <textarea class="text-area" placeholder="写下本次合作的感受，例如：送达是否及时、沟通是否顺畅。">送得很快，沟通也很顺畅，下次还找你。</textarea>
+            <div class="modal-actions">
+              <button class="btn-sm" type="button">取消</button>
+              <button class="btn-sm dark" type="button">提交评价</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel comp-section">
+          <div class="comp-head">
+            <h2>分页 / 空状态 / 错误提示条</h2>
+            <span class="comp-note">常用反馈组件</span>
+          </div>
+
+          <div class="comp-block">
+            <div class="comp-sub">分页</div>
+            <nav class="pager">
+              <a href="#">← 上一页</a>
+              <a class="active" href="#">1</a>
+              <a href="#">2</a>
+              <a href="#">3</a>
+              <a href="#">下一页 →</a>
+            </nav>
+          </div>
+
+          <div class="comp-block">
+            <div class="comp-sub">空状态</div>
+            <div class="empty-state">
+              <div class="empty-ico">空</div>
+              <div class="empty-title">暂无任务</div>
+              <div class="empty-desc">当前分类下还没有任务，换个分类看看或发布一个任务。</div>
+              <a class="btn-sm dark" href="publish.html">去发布任务</a>
+            </div>
+          </div>
+
+          <div class="comp-block">
+            <div class="comp-sub">错误提示条</div>
+            <div class="error-bar">
+              <span class="e-ico">!</span>
+              <span>发布失败：积分不足，请先模拟充值或降低积分预算后再试。</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

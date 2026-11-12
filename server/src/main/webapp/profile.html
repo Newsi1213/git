@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>个人中心 · CampusQuest</title>
+<link rel="stylesheet" href="assets/lib/element-ui/theme-chalk/index.css">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<div id="app" v-cloak>
+  <cq-topbar :me="me"></cq-topbar>
+  <div class="layout">
+    <cq-sidebar active="profile"></cq-sidebar>
+    <div class="main-wrap">
+      <div class="container">
+        <div class="page-head">
+          <div>
+            <h1>个人中心</h1>
+            <div class="sub">管理积分与信用，查看每一笔积分、信用变动记录。</div>
+          </div>
+        </div>
+
+        <div class="profile-grid">
+          <div class="panel profile-card">
+            <div class="profile-avatar">{{ initial }}</div>
+            <div class="profile-name">{{ me.nickname }}</div>
+            <div class="muted small">{{ me.phoneMasked }}</div>
+            <div class="side-divider"></div>
+            <div class="side-kv"><span>积分余额</span><b>{{ me.points }} 积分</b></div>
+            <div class="side-kv"><span>信用分</span><b>{{ me.credit }} 分</b></div>
+            <div class="side-kv"><span>注册时间</span><b>{{ me.createdAt }}</b></div>
+            <div class="mt16">
+              <el-button type="primary" size="small" style="width:100%" @click="rechargeVisible = true">模拟充值</el-button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3 class="panel-title">信用分规则</h3>
+            <ul class="rule-list">
+              <li>收到好评 <b>+3</b> 分，收到差评 <b>−3</b> 分。</li>
+              <li>接单超过 30 分钟放弃任务，扣 <b>2</b> 分。</li>
+              <li>信用分低于 <b>90</b> 分不能发布任务。</li>
+              <li>信用分低于 <b>85</b> 分不能接单。</li>
+              <li>对放弃扣分发起申诉并通过审核，退回 <b>2</b> 分。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="panel section-gap">
+          <div class="panel-head-row">
+            <h3 class="panel-title">积分流水</h3>
+            <div class="chips">
+              <button type="button" class="chip" v-for="t in pointTypes" :key="t.value"
+                      :class="{ active: pointType === t.value }" @click="selectPointType(t.value)">{{ t.label }}</button>
+            </div>
+          </div>
+          <table class="cq-table" v-loading="pointLoading">
+            <thead>
+              <tr><th style="width:22%">时间</th><th style="width:12%">类型</th><th style="width:10%">变动</th>
+                  <th style="width:10%">余额</th><th style="width:26%">关联任务</th><th>备注</th></tr>
+            </thead>
+            <tbody>
+              <tr v-for="log in pointLogs" :key="log.id">
+                <td>{{ log.createdAt }}</td>
+                <td>{{ pointTypeName(log.type) }}</td>
+                <td :class="log.changeAmount >= 0 ? 'delta-up' : 'delta-down'">
+                  {{ log.changeAmount >= 0 ? '+' : '' }}{{ log.changeAmount }}
+                </td>
+                <td>{{ log.balanceAfter }}</td>
+                <td>{{ log.taskTitle || '—' }}</td>
+                <td class="muted">{{ log.remark || '—' }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <cq-empty v-if="!pointLoading && pointLogs.length === 0" text="暂无积分流水"></cq-empty>
+          <el-pagination v-if="pointTotal > 0" background layout="prev, pager, next" :total="pointTotal"
+                         :page-size="pointSize" :current-page="pointPage" @current-change="changePointPage"></el-pagination>
+        </div>
+
+        <div class="panel section-gap">
+          <div class="panel-head-row">
+            <h3 class="panel-title">信用变动记录</h3>
+          </div>
+          <table class="cq-table" v-loading="creditLoading">
+            <thead>
+              <tr><th style="width:20%">时间</th><th style="width:12%">原因</th><th style="width:10%">变动</th>
+                  <th style="width:24%">关联任务</th><th style="width:14%">申诉状态</th><th>操作</th></tr>
+            </thead>
+            <tbody>
+              <tr v-for="log in creditLogs" :key="log.id">
+                <td>{{ log.createdAt }}</td>
+                <td>{{ creditReasonName(log.reason) }}</td>
+                <td :class="log.changeAmount >= 0 ? 'delta-up' : 'delta-down'">
+                  {{ log.changeAmount >= 0 ? '+' : '' }}{{ log.changeAmount }}
+                </td>
+                <td>{{ log.taskTitle || '—' }}</td>
+                <td>
+                  <el-tag v-if="log.appealStatus === 'PENDING'" size="mini" type="warning">待处理</el-tag>
+                  <el-tag v-else-if="log.appealStatus === 'APPROVED'" size="mini" type="success">已通过</el-tag>
+                  <el-tag v-else-if="log.appealStatus === 'REJECTED'" size="mini" type="danger">已驳回</el-tag>
+                  <span v-else class="muted small">—</span>
+                </td>
+                <td>
+                  <el-button v-if="log.reason === 'ABANDON' && log.changeAmount < 0 && !log.appealId"
+                             size="mini" type="warning" plain @click="openAppeal(log)">发起申诉</el-button>
+                  <span v-else-if="log.reason === 'ABANDON'" class="muted small">已申诉</span>
+                  <span v-else class="muted small">—</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <cq-empty v-if="!creditLoading && creditLogs.length === 0" text="暂无信用变动记录"></cq-empty>
+          <el-pagination v-if="creditTotal > 0" background layout="prev, pager, next" :total="creditTotal"
+                         :page-size="creditSize" :current-page="creditPage" @current-change="changeCreditPage"></el-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <el-dialog title="模拟充值" :visible="rechargeVisible" width="420px" @close="rechargeVisible = false">
+    <div class="recharge-box">
+      <p class="muted small">演示环境模拟充值，1 元 = 10 积分，不涉及真实支付。</p>
+      <div class="chips">
+        <button type="button" class="chip" v-for="a in quickAmounts" :key="a"
+                :class="{ active: rechargeAmount === a }" @click="rechargeAmount = a">{{ a }} 元</button>
+      </div>
+      <el-input-number v-model="rechargeAmount" :min="1" :max="10000" :step="10" style="width:100%"></el-input-number>
+      <p class="muted small">到账 {{ rechargeAmount * 10 }} 积分</p>
+      <div class="dialog-actions">
+        <el-button size="small" @click="rechargeVisible = false">取消</el-button>
+        <el-button size="small" type="primary" @click="doRecharge">确认充值</el-button>
+      </div>
+    </div>
+  </el-dialog>
+
+  <el-dialog title="发起信用申诉" :visible="appealVisible" width="520px" @close="appealVisible = false">
+    <div class="appeal-box" v-if="appealLog">
+      <p class="muted small">任务：{{ appealLog.taskTitle || '—' }} · 扣分：{{ appealLog.changeAmount }} 分</p>
+      <el-input type="textarea" :rows="4" maxlength="500" show-word-limit v-model="appealContent"
+                placeholder="请说明放弃任务的客观原因，并上传截图作为凭证"></el-input>
+      <el-upload :auto-upload="false" :limit="1" :file-list="appealFiles" accept="image/*"
+                 list-type="picture" :on-change="onAppealFile" :on-remove="onAppealRemove">
+        <el-button size="small">选择截图</el-button>
+        <div slot="tip" class="muted small">支持 jpg / jpeg / png / gif / webp，不超过 5MB，必须上传。</div>
+      </el-upload>
+      <div class="dialog-actions">
+        <el-button size="small" @click="appealVisible = false">取消</el-button>
+        <el-button size="small" type="primary" :disabled="appealSubmitting" @click="submitAppeal">提交申诉</el-button>
+      </div>
+    </div>
+  </el-dialog>
+</div>
+<script src="assets/lib/vue.min.js"></script>
+<script src="assets/lib/element-ui/index.js"></script>
+<script src="assets/lib/axios.min.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/components.js"></script>
+<script src="assets/js/page/profile.js"></script>
+</body>
+</html>

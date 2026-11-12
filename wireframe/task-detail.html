@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>任务详情 · CampusQuest</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+
+<!-- 顶栏（三页统一） -->
+<header class="topbar">
+  <div class="brand">
+    <div class="logo-mark">CQ</div>
+    <div class="brand-name">CampusQuest</div>
+    <div class="brand-sub">校园互助悬赏平台</div>
+  </div>
+  <div class="top-right">
+    <div class="balance">积分余额<b>100</b><i>积分</i></div>
+    <div class="bell">消息<span class="dot">3</span></div>
+    <div class="avatar-ph">头像</div>
+  </div>
+</header>
+
+<div class="layout">
+  <!-- 左侧导航（三页统一，当前页高亮） -->
+  <aside class="side">
+    <div class="side-title">导航</div>
+    <nav class="nav">
+      <a href="dashboard.html"><span class="nav-ico">□</span>工作台</a>
+      <a class="active" href="lobby.html"><span class="nav-ico">□</span>接单大厅</a>
+      <a href="publish.html"><span class="nav-ico">□</span>发布任务</a>
+      <a href="my-tasks.html"><span class="nav-ico">□</span>我的任务</a>
+      <a href="messages.html"><span class="nav-ico">□</span>消息中心</a>
+      <a href="profile.html"><span class="nav-ico">□</span>个人中心</a>
+      <a href="leaderboard.html"><span class="nav-ico">□</span>排行榜</a>
+    </nav>
+  </aside>
+
+  <main class="main-wrap">
+    <div class="container">
+
+      <div class="page-head">
+        <div>
+          <div class="crumb"><a href="lobby.html">接单大厅</a><span>/</span>任务详情</div>
+          <h1>任务详情</h1>
+        </div>
+        <span class="tag">任务编号 CQ-20261103-018</span>
+      </div>
+
+      <div class="detail-grid">
+
+        <!-- 左主列 -->
+        <div class="detail-main">
+
+          <section class="panel">
+            <h2 class="task-title">帮取中通快递，菜鸟驿站 → 3 号宿舍楼，取件码已发</h2>
+            <div class="task-meta">
+              <span class="tag">取快递</span>
+              <span>悬赏 <b>20</b> 积分</span>
+              <span class="sep">|</span>
+              <span>发布时间：2026-11-03 09:20</span>
+              <span class="sep">|</span>
+              <span>浏览 86 次</span>
+            </div>
+
+            <p class="desc">
+              上午有一件中通快递到了东门菜鸟驿站，我上午满课走不开，想找顺路的同学帮忙取一下。
+              快递是一个中等大小的纸箱，大约 3 公斤，不重。取件码我会在接单确认后私聊发给你。
+            </p>
+            <p class="desc">
+              送到 <strong>3 号宿舍楼一楼门厅货架</strong> 即可，放在第二层标有我名字的位置，放好后拍一张照片发我。
+              如果快递外包装有明显破损，麻烦先拍照告诉我，不要直接签收。
+            </p>
+
+            <div class="divider-dashed"></div>
+
+            <div class="info-grid">
+              <div class="info-box">
+                <div class="info-label">任务地点</div>
+                <div class="info-value">取件：东门菜鸟驿站（营业时间 08:00–21:00）<br>送达：3 号宿舍楼一楼门厅货架</div>
+              </div>
+              <div class="info-box">
+                <div class="info-label">时间说明</div>
+                <div class="info-value">今天 12:00 前送达<br>预计耗时 15–20 分钟，路线顺路即可</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <h2 class="panel-title">发布者</h2>
+            <div class="publisher">
+              <div class="avatar-lg"></div>
+              <div>
+                <div class="publisher-name">
+                  小满
+                  <span class="tag">信用分 98</span>
+                </div>
+                <div class="publisher-meta">
+                  <em>已发布 12 个任务</em>
+                  <em>完成率 96%</em>
+                  注册于 2025 年 9 月
+                </div>
+              </div>
+              <a class="pub-link" href="#">查看主页</a>
+            </div>
+          </section>
+
+          <section class="panel">
+            <h2 class="panel-title">申请接单记录（共 3 人申请）</h2>
+
+            <div class="app-row">
+              <div class="app-avatar"></div>
+              <div>
+                <div class="app-name">阿哲</div>
+                <div class="app-sub">申请时间 2026-11-03 10:05</div>
+              </div>
+              <div class="app-credit">信用分 95</div>
+              <div class="app-state"><span class="confirmed">已确认</span></div>
+            </div>
+
+            <div class="app-row">
+              <div class="app-avatar"></div>
+              <div>
+                <div class="app-name">小鹿</div>
+                <div class="app-sub">申请时间 2026-11-03 09:47</div>
+              </div>
+              <div class="app-credit">信用分 90</div>
+              <div class="app-state"><span class="pending">未确认</span></div>
+            </div>
+
+            <div class="app-row">
+              <div class="app-avatar"></div>
+              <div>
+                <div class="app-name">陈默</div>
+                <div class="app-sub">申请时间 2026-11-03 10:26</div>
+              </div>
+              <div class="app-credit">信用分 97</div>
+              <div class="app-state"><span class="pending">未确认</span></div>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- 右列：操作区 + 聊天区 -->
+        <aside class="detail-side">
+
+          <section class="panel">
+            <span class="status-badge"><span class="pulse"></span>进行中 · 待确认完成</span>
+
+            <div class="countdown">
+              24 小时后自动确认
+              <b>23:14:08</b>
+              接单者已标记送达，等待发布者确认交付。
+            </div>
+
+            <button class="btn-primary" type="button">确认完成交付</button>
+
+            <div class="ops-actions">
+              <button class="btn-ghost" type="button">联系发布者</button>
+              <button class="btn-ghost" type="button">申请申诉</button>
+            </div>
+
+            <div class="ops-note">
+              确认后积分将从发布者账户划转给接单者；如有争议，请在倒计时结束前发起申诉。
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="chat-head">
+              <div class="who">
+                <span class="mini-avatar"></span>
+                与小满的对话
+              </div>
+              <span class="online">在线</span>
+            </div>
+
+            <div class="chat-body">
+              <div class="chat-time">昨天 18:32</div>
+
+              <div class="bubble them">
+                同学你好，快递在菜鸟驿站东门那家，取件码 8-2-1023，麻烦今天中午前送到 3 号宿舍楼楼下。
+              </div>
+
+              <div class="bubble me">
+                收到，我上午最后一节课 11:40 下课，12 点前送到，到了给你发消息。
+              </div>
+
+              <div class="img-bubble">
+                <div class="ph">图片占位</div>
+                <div class="cap">取件码截图</div>
+              </div>
+
+              <div class="bubble me">
+                快递已经放到 3 号楼一楼货架第二层，照片发你了，麻烦确认一下。
+              </div>
+
+              <div class="bubble them">
+                看到了，谢谢！我下课回去就确认。
+              </div>
+            </div>
+
+            <div class="chat-input">
+              <input type="text" placeholder="输入消息…">
+              <div class="img-btn">发图</div>
+              <button class="send-btn" type="button">发送</button>
+            </div>
+          </section>
+
+        </aside>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

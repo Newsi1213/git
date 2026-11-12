@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>接单大厅 · CampusQuest</title>
+<link rel="stylesheet" href="assets/lib/element-ui/theme-chalk/index.css">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<div id="app" v-cloak>
+  <cq-topbar :me="me"></cq-topbar>
+  <div class="layout">
+    <cq-sidebar active="lobby"></cq-sidebar>
+    <div class="main-wrap">
+      <div class="container">
+        <div class="page-head">
+          <div>
+            <h1>接单大厅</h1>
+            <div class="sub">看看有没有顺路能帮上的任务，完成后赚取积分。</div>
+          </div>
+          <el-button size="small" type="primary" @click="go('publish.html')">发布任务</el-button>
+        </div>
+
+        <div class="filter-bar">
+          <div class="chips">
+            <button type="button" class="chip" :class="{ active: category === '' }" @click="selectCategory('')">全部</button>
+            <button type="button" class="chip" v-for="c in categories" :key="c.code"
+                    :class="{ active: category === c.code }" @click="selectCategory(c.code)">{{ c.name }}</button>
+          </div>
+          <div class="filter-row">
+            <div class="search-box">
+              <input type="text" v-model.trim="keyword" maxlength="40" placeholder="搜索任务标题或描述" @keyup.enter="search">
+              <el-button size="small" @click="search">搜索</el-button>
+            </div>
+            <div class="filter-spacer"></div>
+            <el-checkbox v-model="onlyWaiting">只看待接单</el-checkbox>
+            <el-select v-model="sort" size="small" style="width: 150px" @change="reload">
+              <el-option label="最新发布" value="latest"></el-option>
+              <el-option label="积分从高到低" value="points_desc"></el-option>
+              <el-option label="积分从低到高" value="points_asc"></el-option>
+            </el-select>
+          </div>
+        </div>
+
+        <div class="result-line">共 {{ total }} 条任务<span v-if="category"> · {{ categoryName(category) }}</span><span v-if="keyword"> · 关键词「{{ keyword }}」</span></div>
+
+        <div class="task-grid" v-loading="loading">
+          <task-card v-for="t in list" :key="t.id" :task="t"></task-card>
+        </div>
+        <cq-empty v-if="!loading && list.length === 0" text="暂无符合条件的任务，换个筛选条件试试"></cq-empty>
+
+        <el-pagination v-if="total > 0" background layout="prev, pager, next" :total="total"
+                       :page-size="size" :current-page="page" @current-change="changePage"></el-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/lib/vue.min.js"></script>
+<script src="assets/lib/element-ui/index.js"></script>
+<script src="assets/lib/axios.min.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/components.js"></script>
+<script src="assets/js/page/lobby.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>任务详情 · CampusQuest</title>
+<link rel="stylesheet" href="assets/lib/element-ui/theme-chalk/index.css">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<div id="app" v-cloak>
+  <cq-topbar :me="me"></cq-topbar>
+  <div class="layout">
+    <cq-sidebar active="lobby"></cq-sidebar>
+    <div class="main-wrap">
+      <div class="container">
+        <div class="breadcrumb"><a href="lobby.html">接单大厅</a><span class="sep">/</span>任务详情</div>
+
+        <div class="panel" v-if="loading"><p class="muted">加载中…</p></div>
+        <div class="panel" v-else-if="errorText">
+          <div class="error-bar"><span class="e-ico">!</span><span>{{ errorText }}</span></div>
+          <div class="mt16"><el-button size="small" @click="go('lobby.html')">返回接单大厅</el-button></div>
+        </div>
+
+        <div class="detail-grid" v-else-if="task">
+          <div class="panel detail-main">
+            <div class="detail-top">
+              <div>
+                <div class="detail-cat" :style="{ color: catColor }">
+                  <span class="cat-dot" :style="{ background: catColor }"></span>{{ catName }}
+                </div>
+                <h1 class="detail-title">{{ task.title }}</h1>
+                <status-tag :status="task.status"></status-tag>
+              </div>
+              <div class="detail-points">{{ task.points }}<span>积分</span></div>
+            </div>
+
+            <div class="detail-meta">
+              <span>任务编号 {{ task.taskNo }}</span>
+              <span>发布于 {{ task.createdAt }}</span>
+              <span>{{ task.applicationCount }} 人申请</span>
+              <span v-if="task.acceptedAt">接单时间 {{ task.acceptedAt }}</span>
+              <span v-if="task.deliveredAt">送达时间 {{ task.deliveredAt }}</span>
+            </div>
+
+            <div class="desc-block">
+              <h4>任务描述</h4>
+              <p>{{ task.description }}</p>
+            </div>
+            <div class="desc-block">
+              <h4>地点说明</h4>
+              <p>{{ task.locationDesc }}</p>
+            </div>
+            <div class="desc-block">
+              <h4>时间说明</h4>
+              <p>{{ task.timeDesc }}</p>
+            </div>
+
+            <div class="desc-block" v-if="task.acceptorNickname">
+              <h4>接单同学</h4>
+              <p>{{ task.acceptorNickname }} · 信用 {{ task.acceptorCredit }} 分</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="side-card">
+              <div class="user-line">
+                <div class="avatar-ph">{{ initial }}</div>
+                <div>
+                  <div class="user-name">{{ task.publisherNickname }}</div>
+                  <div class="muted small">发布者 · 信用 {{ task.publisherCredit }} 分</div>
+                </div>
+              </div>
+              <div class="side-divider"></div>
+              <div class="side-kv"><span>任务状态</span><b>{{ statusName }}</b></div>
+              <div class="side-kv"><span>申请人数</span><b>{{ task.applicationCount }} 人</b></div>
+              <div class="side-kv" v-if="task.myApplicationStatus"><span>我的申请</span><b>{{ myApplicationText }}</b></div>
+              <div class="side-kv" v-if="task.myReviewRating"><span>我的评价</span><b>{{ task.myReviewRating === 'GOOD' ? '好评' : '差评' }}</b></div>
+              <div class="side-kv" v-if="task.remainingSeconds !== null && task.remainingSeconds !== undefined && task.status === 'PENDING_CONFIRM'">
+                <span>自动确认剩余</span><b>{{ remainText }}</b>
+              </div>
+              <div class="side-divider"></div>
+              <div class="muted small">积分在任务完成后转给接单同学。遇到问题可在任务聊天里沟通。</div>
+
+              <div class="action-stack" v-if="hasAction">
+                <el-button v-if="task.canApply" type="primary" @click="applyTask">申请接单</el-button>
+                <el-button v-if="task.canConfirmApplication" type="success" @click="scrollToApplicants">确认申请同学</el-button>
+                <el-button v-if="task.canComplete" type="primary" @click="completeTask">确认完成交付</el-button>
+                <el-button v-if="task.canReview" type="primary" plain @click="openReview">评价 TA</el-button>
+                <el-button v-if="task.canCancel" type="danger" plain @click="cancelTask">取消任务</el-button>
+                <el-button v-if="task.canDeliver" type="primary" @click="deliverTask">已送达</el-button>
+                <el-button v-if="task.canAbandon" plain @click="abandonTask">放弃任务</el-button>
+              </div>
+              <div class="mt16" v-if="task.status === 'IN_PROGRESS' && isAcceptor">
+                <div class="muted small">你是接单同学，完成并送达后点击「已送达」通知发布者。</div>
+              </div>
+              <div class="mt16" v-if="task.status === 'COMPLETED' && task.canReview">
+                <div class="muted small">任务已完成，可对本次合作进行评价。</div>
+              </div>
+            </div>
+
+            <div class="side-card section-gap" v-if="task.conversationId > 0">
+              <chat-panel :conversation-id="task.conversationId" title="任务聊天"></chat-panel>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel section-gap" id="applicant-panel" v-if="task && isPublisher && applicants.length > 0">
+          <h3 class="panel-title">申请记录（{{ applicants.length }}）</h3>
+          <div class="applicant-row" v-for="a in applicants" :key="a.id">
+            <div>
+              <b>{{ a.applicantNickname }}</b>
+              <span class="muted small"> · 信用 {{ a.applicantCredit }} 分 · 申请于 {{ a.createdAt }}</span>
+            </div>
+            <div>
+              <el-tag v-if="a.status === 'SELECTED'" size="mini" type="success">已选中</el-tag>
+              <el-tag v-else-if="a.status === 'REJECTED'" size="mini" type="info">未选中</el-tag>
+              <el-tag v-else-if="a.status === 'ABANDONED'" size="mini" type="warning">已放弃</el-tag>
+              <el-tag v-else size="mini">待确认</el-tag>
+              <el-button v-if="task.status === 'WAITING' && a.status === 'PENDING'" size="mini" type="primary"
+                         @click="confirmApplicant(a)">确认 TA 接单</el-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <review-dialog :visible="reviewVisible" :task-title="task ? task.title : ''"
+                 @close="reviewVisible = false" @submit="submitReview"></review-dialog>
+</div>
+<script src="assets/lib/vue.min.js"></script>
+<script src="assets/lib/element-ui/index.js"></script>
+<script src="assets/lib/axios.min.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/components.js"></script>
+<script src="assets/js/page/task-detail.js"></script>
+</body>
+</html>

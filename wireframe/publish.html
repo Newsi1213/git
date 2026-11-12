@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>发布任务 · CampusQuest</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+
+<!-- 顶栏（三页统一） -->
+<header class="topbar">
+  <div class="brand">
+    <div class="logo-mark">CQ</div>
+    <div class="brand-name">CampusQuest</div>
+    <div class="brand-sub">校园互助悬赏平台</div>
+  </div>
+  <div class="top-right">
+    <div class="balance">积分余额<b>100</b><i>积分</i></div>
+    <div class="bell">消息<span class="dot">3</span></div>
+    <div class="avatar-ph">头像</div>
+  </div>
+</header>
+
+<div class="layout">
+  <!-- 左侧导航（三页统一，当前页高亮） -->
+  <aside class="side">
+    <div class="side-title">导航</div>
+    <nav class="nav">
+      <a href="dashboard.html"><span class="nav-ico">□</span>工作台</a>
+      <a href="lobby.html"><span class="nav-ico">□</span>接单大厅</a>
+      <a class="active" href="publish.html"><span class="nav-ico">□</span>发布任务</a>
+      <a href="my-tasks.html"><span class="nav-ico">□</span>我的任务</a>
+      <a href="messages.html"><span class="nav-ico">□</span>消息中心</a>
+      <a href="profile.html"><span class="nav-ico">□</span>个人中心</a>
+      <a href="leaderboard.html"><span class="nav-ico">□</span>排行榜</a>
+    </nav>
+  </aside>
+
+  <main class="main-wrap">
+    <div class="container">
+
+      <div class="page-head">
+        <div>
+          <h1>发布任务</h1>
+          <p>把需要帮忙的事说清楚，附上合理的积分，更容易被同学接单。</p>
+        </div>
+        <a class="pub-link" href="lobby.html">← 返回接单大厅</a>
+      </div>
+
+      <div class="publish-grid">
+
+        <!-- 左侧表单 -->
+        <section class="panel">
+          <h2 class="panel-title">填写任务信息</h2>
+
+          <form>
+            <div class="field">
+              <label class="field-label">任务分类<span class="req">必填</span></label>
+              <div class="cat-chips">
+                <button class="chip active" type="button"><span class="bar"></span>取快递</button>
+                <button class="chip" type="button"><span class="bar"></span>代取外卖</button>
+                <button class="chip" type="button"><span class="bar"></span>代替服务</button>
+                <button class="chip" type="button"><span class="bar"></span>搬运服务</button>
+                <button class="chip" type="button"><span class="bar"></span>宿舍打扫</button>
+                <button class="chip" type="button"><span class="bar"></span>其他</button>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="task-title">任务标题<span class="req">必填，最多 30 字</span></label>
+              <input class="text-input" id="task-title" type="text" value="帮取中通快递，菜鸟驿站 → 3 号宿舍楼">
+              <div class="hint">建议写清「做什么 + 从哪里到哪里」，例如：帮取圆通快递，校门口驿站 → 5 号楼。</div>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="task-desc">任务描述<span class="req">必填</span></label>
+              <textarea class="text-area" id="task-desc">上午有一件中通快递到了东门菜鸟驿站，我上午满课走不开，想找顺路的同学帮忙取一下。快递是一个中等大小的纸箱，大约 3 公斤。取件码会在接单确认后私聊发给你，送到 3 号宿舍楼一楼门厅货架即可，放好后拍一张照片给我。</textarea>
+              <div class="hint">补充说明物品大小、注意事项、交付方式，可以减少来回沟通。</div>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="task-points">积分预算<span class="req">必填</span></label>
+              <div class="input-wrap">
+                <input class="text-input" id="task-points" type="number" value="22" min="1" max="100">
+                <span class="input-suffix">积分</span>
+              </div>
+              <div class="hint">发布时将立即扣除该积分，任务完成后划转给接单者；积分越高，接单越快。</div>
+            </div>
+
+            <div class="field">
+              <div class="two-col">
+                <div>
+                  <label class="field-label" for="task-place">任务地点<span class="req">必填</span></label>
+                  <input class="text-input" id="task-place" type="text" value="东门菜鸟驿站 → 3 号宿舍楼一楼门厅">
+                </div>
+                <div>
+                  <label class="field-label" for="task-time">时间说明<span class="req">必填</span></label>
+                  <input class="text-input" id="task-time" type="text" value="今天 12:00 前送达">
+                </div>
+              </div>
+            </div>
+
+            <!-- 灰色提示条 -->
+            <div class="tip-bar">
+              <span class="tip-ico">i</span>
+              发布后余额将剩余 78 积分
+            </div>
+
+            <div class="form-actions">
+              <a class="btn-outline" href="lobby.html">取消</a>
+              <button class="btn-submit" type="button">发布任务</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- 右侧规则卡 -->
+        <aside class="publish-side">
+          <section class="panel rule-card">
+            <h2 class="panel-title">发布规则</h2>
+
+            <div class="rule-row">
+              <span class="rule-label">我的信用分</span>
+              <div class="rule-value">
+                <b>100</b>
+                <span class="rule-flag">≥ 90 可发布</span>
+              </div>
+            </div>
+
+            <div class="rule-row">
+              <span class="rule-label">当前积分余额</span>
+              <div class="rule-value">
+                <b>100</b>
+                <small>积分</small>
+              </div>
+            </div>
+
+            <div class="rule-row">
+              <span class="rule-label">本次扣除积分</span>
+              <div class="rule-value">
+                <b>22</b>
+                <small>积分</small>
+              </div>
+            </div>
+
+            <div class="rule-note">
+              <h4>积分说明</h4>
+              <ul>
+                <li>发布即扣积分，取消任务则全额退还。</li>
+                <li>无人接单 7 天后自动取消，积分原路退回。</li>
+                <li>任务完成后积分划转给接单者，平台不收取手续费。</li>
+                <li>信用分低于 90 时暂时无法发布新任务。</li>
+              </ul>
+            </div>
+          </section>
+        </aside>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  /* 仅用于线框演示的分类切换，无业务逻辑 */
+  (function () {
+    var chips = document.querySelectorAll('.chip');
+    for (var i = 0; i < chips.length; i++) {
+      chips[i].addEventListener('click', function () {
+        for (var j = 0; j < chips.length; j++) {
+          chips[j].classList.remove('active');
+        }
+        this.classList.add('active');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>工作台 · CampusQuest</title>
+<link rel="stylesheet" href="assets/lib/element-ui/theme-chalk/index.css">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<div id="app" v-cloak>
+  <cq-topbar :me="me"></cq-topbar>
+  <div class="layout">
+    <cq-sidebar active="dashboard"></cq-sidebar>
+    <div class="main-wrap">
+      <div class="container">
+        <div class="page-head">
+          <div>
+            <h1>工作台</h1>
+            <p>{{ greetingText }}{{ summaryText }}</p>
+          </div>
+          <a class="pub-link" href="my-tasks.html">查看我的任务 →</a>
+        </div>
+
+        <section class="stat-grid">
+          <a class="stat-card" href="profile.html">
+            <div class="sc-label">积分余额</div>
+            <div class="sc-value">{{ me.points }}<small>积分</small></div>
+            <div class="sc-foot">可用于发布任务</div>
+          </a>
+          <a class="stat-card" href="profile.html">
+            <div class="sc-label">信用分</div>
+            <div class="sc-value">{{ me.credit }}<small>分</small></div>
+            <div class="sc-foot">{{ creditHint }}</div>
+          </a>
+          <a class="stat-card" href="my-tasks.html">
+            <div class="sc-label">我发布中</div>
+            <div class="sc-value">{{ summary.publishedActive }}<small>个任务</small></div>
+            <div class="sc-foot">其中 {{ summary.publishedWaiting }} 个待接单</div>
+          </a>
+          <a class="stat-card" href="my-tasks.html">
+            <div class="sc-label">待我确认</div>
+            <div class="sc-value">{{ summary.toConfirm }}<small>个任务</small></div>
+            <div class="sc-foot">请在 24 小时内处理</div>
+          </a>
+        </section>
+
+        <section class="quick-grid section-gap">
+          <a class="quick-card" href="publish.html">
+            <div class="quick-ico">发布</div>
+            <div>
+              <h3>发布任务</h3>
+              <p>说清要帮忙的事，设置积分预算，等待同学接单。</p>
+            </div>
+            <span class="quick-arrow">→</span>
+          </a>
+          <a class="quick-card" href="lobby.html">
+            <div class="quick-ico">大厅</div>
+            <div>
+              <h3>去接单大厅</h3>
+              <p>看看有没有顺路能帮上的任务，赚取积分。</p>
+            </div>
+            <span class="quick-arrow">→</span>
+          </a>
+        </section>
+
+        <section class="board-grid section-gap">
+          <div class="panel span-2">
+            <h2 class="panel-title">近 7 天任务发布量</h2>
+            <line-chart :data="overview.days"></line-chart>
+            <div class="muted small">横轴为最近 7 个自然日（含今天），纵轴为当天新发布任务数。</div>
+          </div>
+
+          <div class="panel">
+            <h2 class="panel-title">六分类占比</h2>
+            <div v-if="overview.totalTasks > 0" class="pie-wrap">
+              <div class="pie-ring" :style="pieStyle">
+                <div class="pie-center"><b>{{ overview.totalTasks }}</b><span>任务总数</span></div>
+              </div>
+              <ul class="pie-legend">
+                <li v-for="c in overview.categories" :key="c.category">
+                  <span class="sw" :style="{ background: categoryColor(c.category) }"></span>
+                  {{ categoryName(c.category) }}
+                  <span class="muted small">{{ c.count }} 个</span>
+                  <span class="pct">{{ c.percent }}%</span>
+                </li>
+              </ul>
+            </div>
+            <cq-empty v-else text="暂无任务数据"></cq-empty>
+          </div>
+
+          <div class="panel">
+            <h2 class="panel-title">被接单最多任务 Top 5</h2>
+            <ul v-if="overview.top.length > 0" class="top-list">
+              <li class="top5-row" v-for="(t, i) in overview.top" :key="t.taskId">
+                <span class="top5-rank">{{ i + 1 }}</span>
+                <a class="top5-title" :href="'task-detail.html?id=' + t.taskId">{{ t.title }}</a>
+                <span class="notice-tag">{{ categoryName(t.category) }}</span>
+                <span class="muted small">申请 {{ t.applyCount }} 人 · {{ t.points }} 积分</span>
+              </li>
+            </ul>
+            <cq-empty v-else text="暂无任务数据"></cq-empty>
+          </div>
+
+          <div class="panel span-2">
+            <h2 class="panel-title">我的统计</h2>
+            <div class="mini-stats">
+              <div class="mini-stat"><div class="muted small">发布数</div><div class="v">{{ personal.published }}</div></div>
+              <div class="mini-stat"><div class="muted small">完成数</div><div class="v">{{ personal.completed }}</div></div>
+              <div class="mini-stat"><div class="muted small">接单数</div><div class="v">{{ personal.accepted }}</div></div>
+              <div class="mini-stat"><div class="muted small">积分收入</div><div class="v">{{ personal.income }}</div></div>
+              <div class="mini-stat"><div class="muted small">积分支出</div><div class="v">{{ personal.expense }}</div></div>
+            </div>
+            <div class="muted small mt8">发布数不含已取消与已下架；接单数只统计已完成的任务。</div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/lib/vue.min.js"></script>
+<script src="assets/lib/element-ui/index.js"></script>
+<script src="assets/lib/axios.min.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/components.js"></script>
+<script src="assets/js/page/dashboard.js"></script>
+</body>
+</html>

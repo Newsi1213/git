@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>积分排行榜 · CampusQuest</title>
+<link rel="stylesheet" href="assets/lib/element-ui/theme-chalk/index.css">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<div id="app" v-cloak>
+  <cq-topbar :me="me"></cq-topbar>
+  <div class="layout">
+    <cq-sidebar active="leaderboard"></cq-sidebar>
+    <div class="main-wrap">
+      <div class="container">
+        <div class="page-head">
+          <div>
+            <h1>积分排行榜</h1>
+            <div class="sub">按积分降序排列，积分相同按完成任务数排序，数据实时统计。</div>
+          </div>
+        </div>
+
+        <div class="panel my-rank" v-if="mine">
+          <div class="my-rank-no">第 {{ mine.rank }} 名</div>
+          <div class="my-rank-info">
+            <b>{{ mine.nickname }}</b>
+            <span class="muted small">积分 {{ mine.points }} · 信用 {{ mine.credit }} · 已完成 {{ mine.completed }} 单</span>
+          </div>
+          <div class="muted small">我的排名</div>
+        </div>
+
+        <div class="podium section-gap" v-if="top.length > 0">
+          <div class="podium-item" v-for="(p, idx) in top" :key="p.userId">
+            <div class="podium-rank">{{ p.rank }}</div>
+            <div class="podium-name">{{ p.nickname }}</div>
+            <div class="podium-points">{{ p.points }} 积分</div>
+            <div class="muted small">已完成 {{ p.completed }} 单 · 信用 {{ p.credit }}</div>
+          </div>
+        </div>
+
+        <div class="panel section-gap">
+          <h3 class="panel-title">完整榜单</h3>
+          <table class="cq-table" v-loading="loading">
+            <thead>
+              <tr><th style="width:10%">排名</th><th style="width:30%">同学</th><th style="width:16%">积分</th>
+                  <th style="width:16%">信用分</th><th>完成任务</th></tr>
+            </thead>
+            <tbody>
+              <tr v-for="row in list" :key="row.userId" :class="{ 'row-me': mine && row.userId === mine.userId }">
+                <td><b>{{ row.rank }}</b></td>
+                <td>{{ row.nickname }}<span v-if="mine && row.userId === mine.userId" class="tag-dark tag">我</span></td>
+                <td>{{ row.points }}</td>
+                <td>{{ row.credit }}</td>
+                <td>{{ row.completed }} 单</td>
+              </tr>
+            </tbody>
+          </table>
+          <cq-empty v-if="!loading && list.length === 0" text="暂无排名数据"></cq-empty>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/lib/vue.min.js"></script>
+<script src="assets/lib/element-ui/index.js"></script>
+<script src="assets/lib/axios.min.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/components.js"></script>
+<script src="assets/js/page/leaderboard.js"></script>
+</body>
+</html>

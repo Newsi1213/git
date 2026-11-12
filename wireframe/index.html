@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>CampusQuest 校园互助悬赏平台 · 线框图目录</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+
+<!-- 顶栏（学生端统一） -->
+<header class="topbar">
+  <div class="brand">
+    <div class="logo-mark">CQ</div>
+    <div class="brand-name">CampusQuest</div>
+    <div class="brand-sub">校园互助悬赏平台</div>
+  </div>
+  <div class="top-right">
+    <div class="balance">积分余额<b>100</b><i>积分</i></div>
+    <div class="bell">消息<span class="dot">3</span></div>
+    <div class="avatar-ph">头像</div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="side">
+    <div class="side-title">导航</div>
+    <nav class="nav">
+      <a href="dashboard.html"><span class="nav-ico">□</span>工作台</a>
+      <a href="lobby.html"><span class="nav-ico">□</span>接单大厅</a>
+      <a href="publish.html"><span class="nav-ico">□</span>发布任务</a>
+      <a href="my-tasks.html"><span class="nav-ico">□</span>我的任务</a>
+      <a href="messages.html"><span class="nav-ico">□</span>消息中心</a>
+      <a href="profile.html"><span class="nav-ico">□</span>个人中心</a>
+      <a href="leaderboard.html"><span class="nav-ico">□</span>排行榜</a>
+    </nav>
+  </aside>
+
+  <main class="main-wrap">
+    <div class="container">
+
+      <section class="hero">
+        <div class="kicker">WIREFRAME · 完整框架目录</div>
+        <h1>CampusQuest 校园互助悬赏平台</h1>
+        <p>
+          同学发布任务、同学接单完成，以积分结算的校园互助平台。本套页面为静态灰阶线框图，
+          只呈现版式与信息结构，未接入后端、无数据库、无真实业务逻辑；头像与图片均为虚线占位块。
+        </p>
+        <div class="hero-meta">
+          <span class="tag">纯 HTML + CSS</span>
+          <span class="tag">可离线双击打开</span>
+          <span class="tag">无任何外部资源</span>
+          <span class="tag">建议 1280px 及以上桌面宽度</span>
+          <span class="tag">共 12 个页面</span>
+        </div>
+      </section>
+
+      <!-- 未登录 -->
+      <section class="dir-group">
+        <div class="dir-head">
+          <h2>未登录</h2>
+          <span>1 页</span>
+        </div>
+        <div class="dir-cards">
+          <a class="dir-card" href="login.html">
+            <span class="dir-title">登录 / 注册</span>
+            <span class="dir-file">login.html</span>
+            <span class="dir-arrow">→</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 学生端 -->
+      <section class="dir-group">
+        <div class="dir-head">
+          <h2>学生端</h2>
+          <span>8 页</span>
+        </div>
+        <div class="dir-cards">
+          <a class="dir-card" href="dashboard.html">
+            <span class="dir-title">工作台</span>
+            <span class="dir-file">dashboard.html</span>
+            <span class="dir-arrow">→</span>
+          </a>
+          <a class="dir-card" href="lobby.html">
+            <span class="dir-title">接单大厅</span>
+            <span class="dir-file">lobby.html</span>
+            <span class="dir-arrow">→</span>
+          </a>
+          <a class="dir-card" href="task-detail.html">
+            <span class="dir-title">任务详情</span>
+            <span class="dir-file">task-detail.html</span>
+            <span class="dir-arrow">→</span>
+          </a>
+          <a class="dir-card" href="publish.html">
+            <span class="dir-title">发布任务</span>
+            <span class="dir-file">publish.html</span>
+            <span class="dir-arrow">→</span>
+          </a>
+          <a class="dir-card" href="my-tasks.html">
+            <span class="dir-title">我的任务</span>
+            <span class="dir-file">my-tasks.html</span>
+            <span class="dir-arrow">→</span>
+          </a>
+          <a class="dir-card" href="messages.html">
+            <span class="dir-title">消息中心</span>
+            <span class="dir-file">messages.html</span>
+            <span class="dir-arrow">→</span>
+          </a>
+          <a class="dir-card" href="profile.html">
+            <span class="dir-title">个人中心</span>
+            <span class="dir-file">profile.html</span>
+            <span class="dir-arrow">→</span>
+          </a>
+          <a class="dir-card" href="leaderboard.html">
+            <span class="dir-title">排行榜</span>
+            <span class="dir-file">leaderboard.html</span>
+            <span class="dir-arrow">→</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 管理端 -->
+      <section class="dir-group">
+        <div class="dir-head">
+          <h2>管理端</h2>
+          <span>2 页 · admin/</span>
+        </div>
+        <div class="dir-cards">
+          <a class="dir-card" href="admin/appeals.html">
+            <span class="dir-title">申诉处理</span>
+            <span class="dir-file">admin/appeals.html</span>
+            <span class="dir-arrow">→</span>
+          </a>
+          <a class="dir-card" href="admin/tasks.html">
+            <span class="dir-title">任务管理</span>
+            <span class="dir-file">admin/tasks.html</span>
+            <span class="dir-arrow">→</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 公共组件 -->
+      <section class="dir-group">
+        <div class="dir-head">
+          <h2>公共组件</h2>
+          <span>1 页</span>
+        </div>
+        <div class="dir-cards">
+          <a class="dir-card" href="components.html">
+            <span class="dir-title">组件对照</span>
+            <span class="dir-file">components.html</span>
+            <span class="dir-arrow">→</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="frame-note">
+        <div class="mark">i</div>
+        <div>
+          <b>统一框架说明</b>
+          学生端共用同一套顶栏与左侧竖向导航：顶栏左侧为 CampusQuest，右侧为头像占位、积分余额与消息小红点；
+          左侧导航包含工作台、接单大厅、发布任务、我的任务、消息中心、个人中心、排行榜，当前页高亮。
+          管理端使用深色顶栏与仅含「申诉处理 / 任务管理 / 退出」的侧栏，页面位于 admin 子目录，样式通过 <code>../wireframe.css</code> 引用。
+          全部链接均为本地文件或 <code>href="#"</code> 占位，不存在 404。
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

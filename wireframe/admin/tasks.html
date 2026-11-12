@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>任务管理 · CampusQuest 管理后台</title>
+<link rel="stylesheet" href="../wireframe.css">
+</head>
+<body>
+
+<!-- 管理端顶栏 -->
+<header class="topbar admin">
+  <div class="brand">
+    <div class="logo-mark">CQ</div>
+    <div class="brand-name">CampusQuest</div>
+    <div class="brand-sub">管理后台 · ADMIN CONSOLE</div>
+  </div>
+  <div class="top-right">
+    <span class="admin-badge">管理端</span>
+    <div class="admin-user">管理员 · 王老师</div>
+    <div class="avatar-ph">头像</div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="side">
+    <div class="side-title">管理</div>
+    <nav class="nav">
+      <a href="appeals.html"><span class="nav-ico">□</span>申诉处理</a>
+      <a class="active" href="tasks.html"><span class="nav-ico">□</span>任务管理</a>
+      <a href="../login.html"><span class="nav-ico">□</span>退出</a>
+    </nav>
+  </aside>
+
+  <main class="main-wrap">
+    <div class="container">
+
+      <div class="page-head">
+        <div>
+          <h1>任务管理</h1>
+          <p>检索全站任务，下架违规或信息不完整的任务，必要时恢复展示。</p>
+        </div>
+        <span class="tag">共 128 条任务</span>
+      </div>
+
+      <!-- 搜索栏 -->
+      <div class="admin-search">
+        <div class="search">
+          <input type="text" placeholder="搜索任务标题或发布者昵称">
+          <button type="button">搜索</button>
+        </div>
+        <select class="select-input">
+          <option>全部分类</option>
+          <option>取快递</option>
+          <option>代取外卖</option>
+          <option>代替服务</option>
+          <option>搬运服务</option>
+          <option>宿舍打扫</option>
+          <option>其他</option>
+        </select>
+        <select class="select-input">
+          <option>全部状态</option>
+          <option>展示中</option>
+          <option>已下架</option>
+        </select>
+      </div>
+
+      <!-- 下架确认提示条示例 -->
+      <div class="warn-bar">
+        <span class="warn-text">确认下架《帮忙跑一趟打印店，打印装订课程报告 30 份》？下架后学生端将不再展示，已接单的任务不受影响。</span>
+        <div class="warn-actions">
+          <button class="btn-sm" type="button">取消</button>
+          <button class="btn-sm dark" type="button">确认下架</button>
+        </div>
+      </div>
+
+      <section class="panel table-panel">
+        <table class="data-table admin-table">
+          <thead>
+            <tr>
+              <th>任务标题</th>
+              <th style="width: 96px;">分类</th>
+              <th style="width: 96px;">发布者</th>
+              <th class="num" style="width: 82px;">积分</th>
+              <th style="width: 92px;">状态</th>
+              <th style="width: 110px;">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>帮取中通快递，菜鸟驿站 → 3 号宿舍楼</td>
+              <td>取快递</td>
+              <td>小满</td>
+              <td class="num">20</td>
+              <td><span class="status-tag open">展示中</span></td>
+              <td><button class="btn-text" type="button">下架</button></td>
+            </tr>
+            <tr>
+              <td>帮把床垫和行李箱搬到 5 号楼 402，有电梯</td>
+              <td>搬运服务</td>
+              <td>老周</td>
+              <td class="num">45</td>
+              <td><span class="status-tag open">展示中</span></td>
+              <td><button class="btn-text" type="button">下架</button></td>
+            </tr>
+            <tr>
+              <td>中午帮带一份黄焖鸡米饭，东门到教学楼 B 座</td>
+              <td>代取外卖</td>
+              <td>阿哲</td>
+              <td class="num">12</td>
+              <td><span class="status-tag cancelled">已下架</span></td>
+              <td><button class="btn-text" type="button">恢复</button></td>
+            </tr>
+            <tr>
+              <td>帮忙跑一趟打印店，打印装订课程报告 30 份</td>
+              <td>其他</td>
+              <td>陈默</td>
+              <td class="num">25</td>
+              <td><span class="status-tag open">展示中</span></td>
+              <td><button class="btn-text" type="button">下架</button></td>
+            </tr>
+            <tr>
+              <td>周末帮忙打扫四人间，重点是阳台和卫生间</td>
+              <td>宿舍打扫</td>
+              <td>柚子</td>
+              <td class="num">60</td>
+              <td><span class="status-tag open">展示中</span></td>
+              <td><button class="btn-text" type="button">下架</button></td>
+            </tr>
+            <tr>
+              <td>帮忙代排队取号，校医院早上 8 点</td>
+              <td>代替服务</td>
+              <td>白露</td>
+              <td class="num">22</td>
+              <td><span class="status-tag cancelled">已下架</span></td>
+              <td><button class="btn-text" type="button">恢复</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

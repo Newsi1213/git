@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>接单大厅 · CampusQuest</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+
+<!-- 顶栏（三页统一） -->
+<header class="topbar">
+  <div class="brand">
+    <div class="logo-mark">CQ</div>
+    <div class="brand-name">CampusQuest</div>
+    <div class="brand-sub">校园互助悬赏平台</div>
+  </div>
+  <div class="top-right">
+    <div class="balance">积分余额<b>100</b><i>积分</i></div>
+    <div class="bell">消息<span class="dot">3</span></div>
+    <div class="avatar-ph">头像</div>
+  </div>
+</header>
+
+<div class="layout">
+  <!-- 左侧导航（三页统一，当前页高亮） -->
+  <aside class="side">
+    <div class="side-title">导航</div>
+    <nav class="nav">
+      <a href="dashboard.html"><span class="nav-ico">□</span>工作台</a>
+      <a class="active" href="lobby.html"><span class="nav-ico">□</span>接单大厅</a>
+      <a href="publish.html"><span class="nav-ico">□</span>发布任务</a>
+      <a href="my-tasks.html"><span class="nav-ico">□</span>我的任务</a>
+      <a href="messages.html"><span class="nav-ico">□</span>消息中心</a>
+      <a href="profile.html"><span class="nav-ico">□</span>个人中心</a>
+      <a href="leaderboard.html"><span class="nav-ico">□</span>排行榜</a>
+    </nav>
+  </aside>
+
+  <main class="main-wrap">
+    <div class="container">
+
+      <div class="page-head">
+        <div>
+          <h1>接单大厅</h1>
+          <p>挑一个顺路的任务，帮同学一把，也赚点积分。</p>
+        </div>
+        <a class="pub-link" href="publish.html">+ 发布任务</a>
+      </div>
+
+      <!-- 吸顶筛选条 -->
+      <section class="filter-bar">
+        <div class="filter-row">
+          <div class="tabs">
+            <button class="tab active" type="button">全部</button>
+            <button class="tab" type="button">取快递</button>
+            <button class="tab" type="button">代取外卖</button>
+            <button class="tab" type="button">代替服务</button>
+            <button class="tab" type="button">搬运服务</button>
+            <button class="tab" type="button">宿舍打扫</button>
+            <button class="tab" type="button">其他</button>
+          </div>
+          <span class="result-count">共 128 条任务</span>
+        </div>
+
+        <div class="filter-row second">
+          <div class="search">
+            <input type="text" placeholder="搜索任务关键词，例如：快递、外卖、打印">
+            <button type="button">搜索</button>
+          </div>
+          <div class="segment">
+            <button class="active" type="button">最新</button>
+            <button type="button">积分高 → 低</button>
+            <button type="button">积分低 → 高</button>
+          </div>
+          <div class="switch-wrap" id="onlyOpen">
+            <span class="switch"></span>
+            <span>只看待接单</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 任务卡片网格 -->
+      <section class="cards">
+
+        <article class="card">
+          <div class="card-top">
+            <div class="cat"><span class="cat-bar c1"></span>取快递<span class="state">待接单</span></div>
+            <div class="points"><b>20</b><span>积分</span></div>
+          </div>
+          <h3 class="card-title">帮取中通快递，菜鸟驿站 → 3 号宿舍楼，取件码已发</h3>
+          <div class="card-pub">
+            <span class="mini-avatar"></span>
+            <span>小满</span>
+            <span class="credit">信用分 98</span>
+          </div>
+          <div class="card-actions">
+            <a class="link" href="task-detail.html">查看详情 →</a>
+            <span class="apply-badge">3 人申请</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="cat"><span class="cat-bar c2"></span>代取外卖<span class="state">待接单</span></div>
+            <div class="points"><b>12</b><span>积分</span></div>
+          </div>
+          <h3 class="card-title">中午帮带一份黄焖鸡米饭，东门到教学楼 B 座</h3>
+          <div class="card-pub">
+            <span class="mini-avatar"></span>
+            <span>阿哲</span>
+            <span class="credit">信用分 95</span>
+          </div>
+          <div class="card-actions">
+            <a class="link" href="task-detail.html">查看详情 →</a>
+            <span class="apply-badge">0 人申请</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="cat"><span class="cat-bar c3"></span>代替服务<span class="state">待接单</span></div>
+            <div class="points"><b>30</b><span>积分</span></div>
+          </div>
+          <h3 class="card-title">周三下午帮我签到一场讲座，需要人脸识别，进场后拍照</h3>
+          <div class="card-pub">
+            <span class="mini-avatar"></span>
+            <span>林一</span>
+            <span class="credit">信用分 92</span>
+          </div>
+          <div class="card-actions">
+            <a class="link" href="task-detail.html">查看详情 →</a>
+            <span class="apply-badge">5 人申请</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="cat"><span class="cat-bar c4"></span>搬运服务<span class="state">进行中</span></div>
+            <div class="points"><b>45</b><span>积分</span></div>
+          </div>
+          <h3 class="card-title">帮把床垫和行李箱搬到 5 号楼 402，有电梯</h3>
+          <div class="card-pub">
+            <span class="mini-avatar"></span>
+            <span>老周</span>
+            <span class="credit">信用分 100</span>
+          </div>
+          <div class="card-actions">
+            <a class="link" href="task-detail.html">查看详情 →</a>
+            <span class="apply-badge">2 人申请</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="cat"><span class="cat-bar c5"></span>宿舍打扫<span class="state">待接单</span></div>
+            <div class="points"><b>60</b><span>积分</span></div>
+          </div>
+          <h3 class="card-title">周末帮忙打扫四人间，重点是阳台和卫生间，工具齐全</h3>
+          <div class="card-pub">
+            <span class="mini-avatar"></span>
+            <span>柚子</span>
+            <span class="credit">信用分 88</span>
+          </div>
+          <div class="card-actions">
+            <a class="link" href="task-detail.html">查看详情 →</a>
+            <span class="apply-badge">1 人申请</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="cat"><span class="cat-bar c6"></span>其他<span class="state">待接单</span></div>
+            <div class="points"><b>25</b><span>积分</span></div>
+          </div>
+          <h3 class="card-title">帮忙跑一趟打印店，打印装订课程报告 30 份</h3>
+          <div class="card-pub">
+            <span class="mini-avatar"></span>
+            <span>陈默</span>
+            <span class="credit">信用分 97</span>
+          </div>
+          <div class="card-actions">
+            <a class="link" href="task-detail.html">查看详情 →</a>
+            <span class="apply-badge">0 人申请</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="cat"><span class="cat-bar c1"></span>取快递<span class="state">进行中</span></div>
+            <div class="points"><b>15</b><span>积分</span></div>
+          </div>
+          <h3 class="card-title">帮取圆通快递两件，校门口驿站顺路带回来</h3>
+          <div class="card-pub">
+            <span class="mini-avatar"></span>
+            <span>小鹿</span>
+            <span class="credit">信用分 90</span>
+          </div>
+          <div class="card-actions">
+            <a class="link" href="task-detail.html">查看详情 →</a>
+            <span class="apply-badge">1 人申请</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="cat"><span class="cat-bar c2"></span>代取外卖<span class="state">待接单</span></div>
+            <div class="points"><b>18</b><span>积分</span></div>
+          </div>
+          <h3 class="card-title">晚上帮带一杯奶茶和一份炸鸡，南门送到图书馆自习区</h3>
+          <div class="card-pub">
+            <span class="mini-avatar"></span>
+            <span>阿宽</span>
+            <span class="credit">信用分 96</span>
+          </div>
+          <div class="card-actions">
+            <a class="link" href="task-detail.html">查看详情 →</a>
+            <span class="apply-badge">4 人申请</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="cat"><span class="cat-bar c3"></span>代替服务<span class="state">待接单</span></div>
+            <div class="points"><b>22</b><span>积分</span></div>
+          </div>
+          <h3 class="card-title">帮忙代排队取号，校医院早上 8 点，拿到号后拍照给我</h3>
+          <div class="card-pub">
+            <span class="mini-avatar"></span>
+            <span>白露</span>
+            <span class="credit">信用分 93</span>
+          </div>
+          <div class="card-actions">
+            <a class="link" href="task-detail.html">查看详情 →</a>
+            <span class="apply-badge">2 人申请</span>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- 分页 -->
+      <nav class="pager">
+        <a href="#">← 上一页</a>
+        <a class="active" href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <span class="pager-label">…</span>
+        <a href="#">8</a>
+        <a href="#">下一页 →</a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  /* 仅用于线框演示的切换效果，无业务逻辑 */
+  (function () {
+    var tabs = document.querySelectorAll('.tab');
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].addEventListener('click', function () {
+        for (var j = 0; j < tabs.length; j++) {
+          tabs[j].classList.remove('active');
+        }
+        this.classList.add('active');
+      });
+    }
+
+    var sorts = document.querySelectorAll('.segment button');
+    for (var k = 0; k < sorts.length; k++) {
+      sorts[k].addEventListener('click', function () {
+        for (var m = 0; m < sorts.length; m++) {
+          sorts[m].classList.remove('active');
+        }
+        this.classList.add('active');
+      });
+    }
+
+    var onlyOpen = document.getElementById('onlyOpen');
+    onlyOpen.addEventListener('click', function () {
+      onlyOpen.querySelector('.switch').classList.toggle('on');
+    });
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>我的任务 · CampusQuest</title>
+<link rel="stylesheet" href="assets/lib/element-ui/theme-chalk/index.css">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<div id="app" v-cloak>
+  <cq-topbar :me="me"></cq-topbar>
+  <div class="layout">
+    <cq-sidebar active="my-tasks"></cq-sidebar>
+    <div class="main-wrap">
+      <div class="container">
+        <div class="page-head">
+          <div>
+            <h1>我的任务</h1>
+            <div class="sub">我发布的任务与我接下的任务都在这里，按状态跟踪进度。</div>
+          </div>
+          <div>
+            <el-button size="small" @click="go('lobby.html')">去接单大厅</el-button>
+            <el-button size="small" type="primary" @click="go('publish.html')">发布任务</el-button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="chips mb12">
+            <button type="button" class="chip" :class="{ active: tab === 'published' }" @click="switchTab('published')">
+              我发布的 <b v-if="counts.published > 0">{{ counts.published }}</b>
+            </button>
+            <button type="button" class="chip" :class="{ active: tab === 'accepted' }" @click="switchTab('accepted')">
+              我接的 <b v-if="counts.accepted > 0">{{ counts.accepted }}</b>
+            </button>
+          </div>
+
+          <div class="chips mb16">
+            <button type="button" class="chip" v-for="s in statusOptions" :key="s.value"
+                    :class="{ active: status === s.value }" @click="selectStatus(s.value)">{{ s.label }}</button>
+          </div>
+
+          <table class="cq-table" v-loading="loading">
+            <thead>
+              <tr>
+                <th style="width: 34%">任务</th>
+                <th style="width: 10%">积分</th>
+                <th style="width: 12%">状态</th>
+                <th style="width: 14%">{{ tab === 'published' ? '接单同学' : '发布者' }}</th>
+                <th style="width: 10%">申请人数</th>
+                <th style="width: 20%">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="t in list" :key="t.id">
+                <td>
+                  <a class="task-link" href="javascript:void(0)" @click="openTask(t.id)">{{ t.title }}</a>
+                  <div class="muted small">{{ t.taskNo }} · {{ categoryName(t.category) }}</div>
+                </td>
+                <td><b>{{ t.points }}</b> 积分</td>
+                <td><status-tag :status="t.status"></status-tag></td>
+                <td>{{ t.counterpartNickname || '—' }}</td>
+                <td>{{ t.applicationCount }} 人</td>
+                <td>
+                  <el-button size="mini" @click="openTask(t.id)">查看详情</el-button>
+                  <template v-if="tab === 'published' && t.status === 'WAITING'">
+                    <el-button size="mini" type="danger" plain @click="cancelTask(t)">取消任务</el-button>
+                  </template>
+                  <template v-if="tab === 'accepted' && t.status === 'IN_PROGRESS'">
+                    <el-button size="mini" type="primary" @click="deliverTask(t)">已送达</el-button>
+                    <el-button size="mini" plain @click="abandonTask(t)">放弃</el-button>
+                  </template>
+                  <template v-if="tab === 'published' && t.status === 'PENDING_CONFIRM'">
+                    <el-button size="mini" type="primary" @click="completeTask(t)">确认完成</el-button>
+                    <span class="countdown">剩余 {{ remainText(t.remainingSeconds) }}</span>
+                  </template>
+                  <span v-if="tab === 'accepted' && t.status === 'PENDING_CONFIRM'" class="countdown">
+                    等待发布者确认 · 剩余 {{ remainText(t.remainingSeconds) }}
+                  </span>
+                  <template v-if="t.status === 'COMPLETED'">
+                    <el-button v-if="!t.myReviewRating" size="mini" @click="openReview(t)">评价 TA</el-button>
+                    <span v-else class="muted small">已评价</span>
+                  </template>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <cq-empty v-if="!loading && list.length === 0" :text="emptyText"></cq-empty>
+
+          <el-pagination v-if="total > 0" background layout="prev, pager, next" :total="total"
+                         :page-size="size" :current-page="page" @current-change="changePage"></el-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <review-dialog :visible="reviewVisible" :task-title="currentTask ? currentTask.title : ''"
+                 @close="reviewVisible = false" @submit="submitReview"></review-dialog>
+</div>
+<script src="assets/lib/vue.min.js"></script>
+<script src="assets/lib/element-ui/index.js"></script>
+<script src="assets/lib/axios.min.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/components.js"></script>
+<script src="assets/js/page/my-tasks.js"></script>
+</body>
+</html>

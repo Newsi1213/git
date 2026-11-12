@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>公共组件 · CampusQuest</title>
+<link rel="stylesheet" href="assets/lib/element-ui/theme-chalk/index.css">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<div id="app" v-cloak>
+  <div class="layout">
+    <div class="main-wrap">
+      <div class="container">
+        <div class="page-head">
+          <div>
+            <h1>公共组件</h1>
+            <div class="sub">开发自查页，不进入学生端导航，也不作为产品入口。</div>
+          </div>
+          <a href="dashboard.html" class="pub-link">返回工作台 →</a>
+        </div>
+
+        <section class="panel section-gap">
+          <h2 class="panel-title">任务卡片三态</h2>
+          <div class="task-grid">
+            <task-card v-for="t in tasks" :key="t.id" :task="t"></task-card>
+          </div>
+        </section>
+
+        <section class="panel section-gap">
+          <h2 class="panel-title">五种状态标签与下架态</h2>
+          <div class="demo-row">
+            <status-tag status="WAITING"></status-tag>
+            <status-tag status="IN_PROGRESS"></status-tag>
+            <status-tag status="PENDING_CONFIRM"></status-tag>
+            <status-tag status="COMPLETED"></status-tag>
+            <status-tag status="CANCELLED"></status-tag>
+            <status-tag status="COMPLETED" :offline="1"></status-tag>
+          </div>
+        </section>
+
+        <section class="panel section-gap">
+          <h2 class="panel-title">评价弹窗</h2>
+          <div class="demo-row">
+            <el-button type="primary" size="small" @click="reviewVisible = true">打开评价弹窗</el-button>
+            <span class="muted small">好评 +3 信用，差评 -3 信用，说明最多 100 字。</span>
+          </div>
+          <review-dialog :visible="reviewVisible" task-title="演示任务：代取东门快递"
+                         @close="reviewVisible = false" @submit="onReview"></review-dialog>
+        </section>
+
+        <section class="panel section-gap">
+          <h2 class="panel-title">分页</h2>
+          <el-pagination layout="prev, pager, next" :current-page="page" :page-size="5"
+                         :total="48" @current-change="page = $event"></el-pagination>
+          <div class="muted small mt8">当前第 {{ page }} 页，每页 5 条，共 48 条。</div>
+        </section>
+
+        <section class="panel section-gap">
+          <h2 class="panel-title">空状态</h2>
+          <div class="demo-grid">
+            <div><cq-empty text="暂无任务数据"></cq-empty></div>
+            <div><cq-empty text="暂无聊天记录"></cq-empty></div>
+          </div>
+        </section>
+
+        <section class="panel section-gap">
+          <h2 class="panel-title">错误提示条</h2>
+          <div class="error-bar"><span class="e-ico">!</span><span>积分不足，无法发布该任务。</span></div>
+          <div class="error-bar" style="margin-top:10px"><span class="e-ico">!</span><span>信用分低于 85，不能接单。</span></div>
+        </section>
+
+        <section class="panel section-gap">
+          <h2 class="panel-title">按钮层级</h2>
+          <div class="demo-row">
+            <el-button type="primary" size="small">主操作</el-button>
+            <el-button size="small">次操作</el-button>
+            <el-button type="text" size="small">文字操作</el-button>
+            <el-button type="danger" size="small">危险操作</el-button>
+            <el-button size="small" disabled>禁用操作</el-button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/lib/vue.min.js"></script>
+<script src="assets/lib/element-ui/index.js"></script>
+<script src="assets/lib/axios.min.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/components.js"></script>
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    page: 1,
+    reviewVisible: false,
+    tasks: [
+      { id: 1, category: 'EXPRESS', title: '帮取中通快递，菜鸟驿站 → 3 号宿舍楼', points: 20, status: 'WAITING',
+        publisherNickname: '小林', publisherCredit: 100, applicationCount: 2, createdAt: '2026-11-09 09:20' },
+      { id: 2, category: 'TAKEOUT', title: '中午帮带一份黄焖鸡米饭，东门到教学楼 B 座', points: 12, status: 'IN_PROGRESS',
+        publisherNickname: '小满', publisherCredit: 98, applicationCount: 1, createdAt: '2026-11-09 10:05' },
+      { id: 3, category: 'CLEANING', title: '周末帮忙打扫四人间，重点是阳台和卫生间', points: 60, status: 'COMPLETED',
+        publisherNickname: '阿哲', publisherCredit: 97, applicationCount: 3, createdAt: '2026-11-08 16:40' }
+    ]
+  },
+  methods: {
+    onReview: function (payload) {
+      ElementUI.Message.success('已选择：' + (payload.rating === 'GOOD' ? '好评' : '差评'));
+      this.reviewVisible = false;
+    }
+  }
+});
+</script>
+</body>
+</html>
